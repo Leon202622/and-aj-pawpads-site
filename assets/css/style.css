@@ -201,6 +201,38 @@ h1 {
     0 3px 12px rgba(0,0,0,.82);
 }
 
+/* ── Pending / Notice badge ── */
+.notice-pending {
+  display: block;
+  font-size: .72rem;
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  font-weight: 400;
+  color: rgba(255,250,241,.78);
+  margin-top: 6px;
+  letter-spacing: .03em;
+  text-shadow: 0 1px 4px rgba(0,0,0,.5);
+}
+
+.badge-pending {
+  display: inline-block;
+  background: rgba(160,100,40,.9);
+  color: var(--cream);
+  font-size: .62rem;
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+  padding: 2px 7px;
+  border-radius: 999px;
+  letter-spacing: .04em;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.contact-card .notice-pending {
+  color: var(--ink-light);
+  text-shadow: none;
+  font-size: .75rem;
+  margin-top: 4px;
+}
+
 /* ── CTA Buttons ── */
 .cta {
   display: flex;
@@ -479,6 +511,7 @@ li { margin-bottom: .1em; }
 }
 
 .contact-card p { font-size: .82rem; margin-bottom: 10px; color: var(--ink-light); }
+.contact-card .btn { width: 100%; text-align: center; }
 
 /* ── Footer ── */
 footer {
@@ -509,21 +542,43 @@ footer a:hover { color: var(--cream); }
   .products-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* タブレット〜スマホ上位 */
+@media (max-width: 720px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* スマホ標準（〜560px） */
 @media (max-width: 560px) {
+  /* Hero */
   .hero { min-height: 500px; padding: 72px 66px 64px; }
   .hero::before, .hero::after { width: 50px; background-size: 50px auto; }
   .hero::before { left: 10px; }
   .hero::after  { right: 10px; }
   h1 { font-size: 2rem; }
+
+  /* Nav: テキストリンクを隠してロゴ + Online Shopボタンのみ表示 */
   .site-nav { padding: 0 12px; }
-  .nav-links { gap: 2px; }
-  .nav-links a { padding: 5px 7px; font-size: .67rem; }
+  .nav-links li:not(:last-child) { display: none; }
+  .nav-links { gap: 0; }
+
+  /* CTA ボタン縦並び */
+  .cta { flex-direction: column; align-items: center; }
+  .cta .btn { width: 100%; max-width: 300px; text-align: center; }
+
+  /* Contact grid 1カラム */
   .contact-grid { grid-template-columns: 1fr; }
+
+  /* Gallery 2カラム維持、高さ調整 */
+  .gallery-item { min-height: 110px; }
 }
 
+/* スマホ小型（〜400px） */
 @media (max-width: 400px) {
   .hero { padding: 72px 54px 64px; }
   .hero::before, .hero::after { width: 42px; background-size: 42px auto; }
   .hero::before { left: 6px; }
   .hero::after  { right: 6px; }
+
+  /* 商品カード 1カラム */
+  .products-grid { grid-template-columns: 1fr; }
 }
