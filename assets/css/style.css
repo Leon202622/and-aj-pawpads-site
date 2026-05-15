@@ -1,0 +1,529 @@
+/* ============================================================
+   and AJ paw-pads — Official Site CSS
+   Color: jacquard-teal (#7faba9 family)
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --teal-dark:    #35615f;
+  --teal-mid:     #7faba9;
+  --teal-light:   #9fc8c5;
+  --teal-pale:    #a7cbc8;
+  --cream:        #fffaf1;
+  --cream-bg:     #f5ede0;
+  --ink:          #2f2925;
+  --ink-light:    #5a4f44;
+
+  --ribbon-pattern:
+    repeating-linear-gradient(90deg,
+      rgba(255,250,241,.28) 0 2px, transparent 2px 9px,
+      rgba(76,125,122,.34) 9px 12px, transparent 12px 22px),
+    repeating-linear-gradient(0deg,
+      rgba(255,250,241,.2) 0 2px, transparent 2px 18px),
+    linear-gradient(180deg, #8bb8b6, #7faba9 58%, #6f9d9a);
+
+  --jacquard: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='none'/%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.34' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M90 14 C104 30 104 48 90 64 C76 48 76 30 90 14Z'/%3E%3Cpath d='M90 166 C104 150 104 132 90 116 C76 132 76 150 90 166Z'/%3E%3Cpath d='M14 90 C30 76 48 76 64 90 C48 104 30 104 14 90Z'/%3E%3Cpath d='M166 90 C150 76 132 76 116 90 C132 104 150 104 166 90Z'/%3E%3Cpath d='M90 58 C112 70 126 78 138 90 C126 102 112 110 90 122 C68 110 54 102 42 90 C54 78 68 70 90 58Z'/%3E%3Cpath d='M56 56 C70 64 80 74 90 90 C100 74 110 64 124 56'/%3E%3Cpath d='M56 124 C70 116 80 106 90 90 C100 106 110 116 124 124'/%3E%3C/g%3E%3Cg fill='%23ffffff' fill-opacity='.16'%3E%3Ccircle cx='90' cy='90' r='7'/%3E%3Ccircle cx='90' cy='14' r='3'/%3E%3Ccircle cx='90' cy='166' r='3'/%3E%3Ccircle cx='14' cy='90' r='3'/%3E%3Ccircle cx='166' cy='90' r='3'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ── Base ── */
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  background:
+    var(--jacquard),
+    radial-gradient(circle at 50% 0%, rgba(255,250,241,.42), transparent 28rem),
+    linear-gradient(180deg, #9fc8c5 0%, #7faba9 46%, #6d9b98 100%);
+  background-size: 180px 180px, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat;
+  color: var(--ink);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Sticky Nav ── */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 52px;
+  background:
+    linear-gradient(90deg, rgba(72,121,118,.96), rgba(127,171,169,.92));
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,250,241,.35);
+  box-shadow: 0 2px 16px rgba(55,88,86,.3);
+}
+
+.nav-logo {
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  font-weight: 900;
+  font-size: .85rem;
+  color: var(--cream);
+  text-decoration: none;
+  letter-spacing: .04em;
+  -webkit-text-stroke: .3px rgba(15,13,12,.7);
+  text-shadow: 0 1px 4px rgba(0,0,0,.5);
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  display: block;
+  padding: 6px 10px;
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  color: rgba(255,250,241,.9);
+  text-decoration: none;
+  border-radius: 999px;
+  transition: background .18s, color .18s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  background: rgba(255,250,241,.18);
+  color: var(--cream);
+}
+
+.nav-shop {
+  background: linear-gradient(135deg, var(--cream), #e5d9c7) !important;
+  color: var(--ink) !important;
+  font-weight: 900 !important;
+  border: 1px solid rgba(255,255,255,.5);
+  box-shadow: inset 0 0 0 1px rgba(76,125,122,.2);
+}
+
+.nav-shop:hover {
+  background: var(--cream) !important;
+  color: var(--teal-dark) !important;
+}
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  min-height: 540px;
+  padding: 80px 96px 72px;
+  text-align: center;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(rgba(127,171,169,.06), rgba(111,157,154,.12)),
+    var(--jacquard),
+    radial-gradient(circle at 50% 35%, rgba(255,250,241,.5), transparent 15rem),
+    linear-gradient(145deg, #a7cbc8, #7faba9 55%, #689693);
+  background-size: auto, 190px 190px, auto, auto;
+  background-repeat: no-repeat, repeat, no-repeat, no-repeat;
+  border-bottom: 1px solid rgba(255,250,241,.72);
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  bottom: 16px;
+  width: 64px;
+  background: var(--ribbon-pattern);
+  background-size: 64px auto;
+  border-left: 1px solid rgba(255,250,241,.44);
+  border-right: 1px solid rgba(76,125,122,.36);
+  box-shadow: 0 12px 32px rgba(55,88,86,.28);
+  opacity: .88;
+}
+
+.hero::before { left: 16px; }
+.hero::after  { right: 16px; }
+.hero > * { position: relative; z-index: 1; }
+
+.hero-inner { display: grid; gap: 0; }
+
+.eyebrow {
+  display: inline-block;
+  justify-self: center;
+  padding: 6px 16px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+  background: rgba(255,250,241,.84);
+  border-radius: 999px;
+  font-size: .72rem;
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+h1 {
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: clamp(2rem, 12vw, 4.4rem);
+  font-weight: 900;
+  color: var(--cream);
+  margin: .3em 0;
+  letter-spacing: .04em;
+  -webkit-text-stroke: 1.2px rgba(18,15,13,.9);
+  text-shadow:
+    0 2px 0 rgba(18,15,13,.95),
+    1px 1px 0 rgba(18,15,13,.9),
+    -1px 1px 0 rgba(18,15,13,.9),
+    1px -1px 0 rgba(18,15,13,.9),
+    -1px -1px 0 rgba(18,15,13,.9),
+    0 5px 16px rgba(0,0,0,.82),
+    0 0 26px rgba(255,250,241,.18);
+}
+
+.catch {
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: clamp(.9rem, 3vw, 1.15rem);
+  font-weight: 800;
+  color: var(--cream);
+  line-height: 1.8;
+  letter-spacing: .03em;
+  margin-bottom: 1.6em;
+  -webkit-text-stroke: .35px rgba(18,15,13,.86);
+  text-shadow:
+    0 1px 0 rgba(18,15,13,.95),
+    1px 1px 0 rgba(18,15,13,.8),
+    -1px 1px 0 rgba(18,15,13,.8),
+    1px -1px 0 rgba(18,15,13,.8),
+    -1px -1px 0 rgba(18,15,13,.8),
+    0 3px 12px rgba(0,0,0,.82);
+}
+
+/* ── CTA Buttons ── */
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: .88rem;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.45);
+  transition: transform .15s, box-shadow .15s, filter .15s;
+  cursor: pointer;
+}
+
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.22); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary {
+  color: var(--ink);
+  background: linear-gradient(135deg, #fffaf1, #e5d9c7);
+  box-shadow: inset 0 0 0 1px rgba(76,125,122,.2), 0 3px 10px rgba(0,0,0,.18);
+}
+
+.btn-shop {
+  color: var(--cream);
+  background: linear-gradient(135deg, #3a7370, #4c897d);
+  border-color: rgba(255,250,241,.3);
+  box-shadow: 0 3px 10px rgba(0,0,0,.22);
+  letter-spacing: .04em;
+}
+
+.btn-shop:hover { filter: brightness(1.12); }
+
+.btn-instagram {
+  color: var(--cream);
+  background: linear-gradient(135deg, #5c6bc0, #7b5ea7);
+  border-color: rgba(255,250,241,.2);
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
+}
+
+.btn-creema {
+  color: var(--cream);
+  background: linear-gradient(135deg, #e25c6a, #c44d5a);
+  border-color: rgba(255,250,241,.2);
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
+}
+
+/* ── Main Content ── */
+main {
+  padding: 20px 18px 48px;
+  display: grid;
+  gap: 18px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ── Sections ── */
+section {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(255,250,241,.68), rgba(255,250,241,.82)),
+    var(--jacquard),
+    linear-gradient(135deg, #a7cbc8, #7faba9);
+  background-size: auto, 170px 170px, auto;
+  background-repeat: no-repeat, repeat, no-repeat;
+  border: 1px solid rgba(255,250,241,.62);
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 18px 38px rgba(55,88,86,.22);
+}
+
+section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 34px;
+  background: var(--ribbon-pattern);
+  background-size: 48px auto;
+  opacity: .7;
+  border-right: 1px solid rgba(76,125,122,.25);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-content {
+  position: relative;
+  margin-left: 34px;
+  padding: 0 18px 20px;
+}
+
+h2 {
+  position: relative;
+  margin: 0 0 16px -0px;
+  padding: 13px 18px 14px 18px;
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: clamp(.95rem, 3vw, 1.15rem);
+  font-weight: 900;
+  color: var(--cream);
+  background:
+    linear-gradient(90deg, rgba(72,121,118,.92), rgba(127,171,169,.72)),
+    var(--ribbon-pattern);
+  background-size: auto, 64px auto;
+  border-bottom: 1px solid rgba(255,250,241,.45);
+  -webkit-text-stroke: .35px rgba(15,13,12,.82);
+  text-shadow: 0 1px 0 rgba(15,13,12,.95), 0 3px 10px rgba(0,0,0,.75);
+  letter-spacing: .04em;
+}
+
+h2::after {
+  content: "✦ ✧ ✦";
+  display: block;
+  margin-top: 5px;
+  color: rgba(255,250,241,.82);
+  font-size: .72rem;
+  letter-spacing: .5em;
+  font-weight: 400;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+
+p {
+  margin: 0 0 .8em;
+  line-height: 1.85;
+  font-size: .95rem;
+}
+
+ul {
+  padding-left: 1.2em;
+  line-height: 2;
+  font-size: .95rem;
+  margin: 0 0 .5em;
+}
+
+li { margin-bottom: .1em; }
+
+/* ── Products Grid ── */
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.product-card {
+  background:
+    linear-gradient(rgba(255,250,241,.55), rgba(255,250,241,.7)),
+    var(--jacquard);
+  background-size: auto, 120px 120px;
+  border: 1px solid rgba(76,125,122,.28);
+  border-radius: 8px;
+  padding: 14px 12px;
+  text-align: center;
+}
+
+.product-card .icon { font-size: 1.6rem; display: block; margin-bottom: 6px; }
+.product-card .name {
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+  font-weight: 700;
+  font-size: .85rem;
+  color: var(--teal-dark);
+  display: block;
+  margin-bottom: 4px;
+}
+.product-card .desc { font-size: .78rem; color: var(--ink-light); line-height: 1.6; }
+
+/* ── Gallery ── */
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.gallery-item {
+  min-height: 140px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border: 1px solid rgba(255,250,241,.64);
+  border-radius: 8px;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(76,125,122,.16), rgba(76,125,122,.32)),
+    var(--jacquard),
+    var(--ribbon-pattern);
+  background-size: auto, 150px 150px, 64px auto;
+  background-repeat: no-repeat, repeat, repeat;
+  color: var(--cream);
+  font-size: .8rem;
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Event ── */
+.event-card {
+  background:
+    linear-gradient(rgba(255,250,241,.5), rgba(255,250,241,.65)),
+    var(--jacquard);
+  background-size: auto, 120px 120px;
+  border: 1px solid rgba(76,125,122,.28);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 8px 0;
+}
+
+.event-card .event-date {
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+  font-weight: 900;
+  font-size: .9rem;
+  color: var(--teal-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.event-card .event-name {
+  font-size: .88rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+.event-badge {
+  display: inline-block;
+  background: var(--teal-dark);
+  color: var(--cream);
+  font-size: .65rem;
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: .06em;
+  vertical-align: middle;
+}
+
+/* ── Contact / Order ── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.contact-card {
+  background: rgba(255,250,241,.55);
+  border: 1px solid rgba(76,125,122,.25);
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+}
+
+.contact-card .contact-label {
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+  font-weight: 700;
+  font-size: .78rem;
+  color: var(--teal-dark);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.contact-card p { font-size: .82rem; margin-bottom: 10px; color: var(--ink-light); }
+
+/* ── Footer ── */
+footer {
+  text-align: center;
+  padding: 32px 18px 28px;
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: .75rem;
+  color: rgba(255,250,241,.7);
+  border-top: 1px solid rgba(255,250,241,.2);
+  background: rgba(55,88,86,.15);
+  letter-spacing: .06em;
+}
+
+footer a {
+  color: rgba(255,250,241,.8);
+  text-decoration: none;
+}
+footer a:hover { color: var(--cream); }
+
+.footer-links { display: flex; justify-content: center; gap: 18px; margin-bottom: 10px; flex-wrap: wrap; }
+
+/* ── Scroll anchor offset ── */
+[id] { scroll-margin-top: 62px; }
+
+/* ── Responsive ── */
+@media (min-width: 640px) {
+  .gallery { grid-template-columns: repeat(4, 1fr); }
+  .products-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .hero { min-height: 500px; padding: 72px 66px 64px; }
+  .hero::before, .hero::after { width: 50px; background-size: 50px auto; }
+  .hero::before { left: 10px; }
+  .hero::after  { right: 10px; }
+  h1 { font-size: 2rem; }
+  .site-nav { padding: 0 12px; }
+  .nav-links { gap: 2px; }
+  .nav-links a { padding: 5px 7px; font-size: .67rem; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 400px) {
+  .hero { padding: 72px 54px 64px; }
+  .hero::before, .hero::after { width: 42px; background-size: 42px auto; }
+  .hero::before { left: 6px; }
+  .hero::after  { right: 6px; }
+}
