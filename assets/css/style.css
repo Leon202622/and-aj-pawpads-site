@@ -410,15 +410,13 @@ section::before {
 .section-inner {
   position: relative;
   margin-left: 34px;
-  max-width: calc(var(--section-max) - 34px);
-  margin-right: auto;
 }
 
 /* ── Section Header ── */
 h2.section-heading {
   position: relative;
   margin: 0;
-  padding: 14px 20px 15px;
+  padding: 14px 20px 15px 54px; /* 34px ribbon + 20px gap */
   font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
   font-size: clamp(1rem, 3vw, 1.15rem);
   font-weight: 900;
