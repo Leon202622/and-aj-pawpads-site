@@ -610,3 +610,8 @@ button { font: inherit; color: inherit; }
   .chapter__en { font-size: 46px; }
   .order__en { font-size: 30px; }
 }
+
+/* JS 無効時はヘッダーを常に不透明に */
+html:not(.js) .header { background: rgba(243,238,230,.92); box-shadow: 0 1px 0 var(--line); }
+/* メニュー展開中は backdrop-filter を外す（fixed 子要素の包含ブロックになるため） */
+.header.menu-open { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--paper); }

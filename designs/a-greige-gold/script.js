@@ -141,14 +141,14 @@
   function onScroll() { header.classList.toggle('is-scrolled', window.scrollY > 40); }
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
   function closeMenu() {
-    nav.classList.remove('is-open'); menuBtn.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('is-open'); header.classList.remove('menu-open'); menuBtn.setAttribute('aria-expanded', 'false');
     menuBtn.setAttribute('aria-label', 'メニューを開く'); document.body.style.overflow = '';
   }
   if (menuBtn && nav) {
     menuBtn.addEventListener('click', function () {
       var open = !nav.classList.contains('is-open');
       if (!open) return closeMenu();
-      nav.classList.add('is-open'); menuBtn.setAttribute('aria-expanded', 'true');
+      nav.classList.add('is-open'); header.classList.add('menu-open'); menuBtn.setAttribute('aria-expanded', 'true');
       menuBtn.setAttribute('aria-label', 'メニューを閉じる'); document.body.style.overflow = 'hidden';
     });
     $$('a', nav).forEach(function (a) { a.addEventListener('click', closeMenu); });
