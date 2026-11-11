@@ -76,10 +76,15 @@
         <stop offset=".5" stop-color="#9fb3c0"/>
         <stop offset="1" stop-color="#b39a5f"/>
       </linearGradient>
+      <mask id="ribbonReveal" maskUnits="userSpaceOnUse" x="-50" y="-50" width="200%" height="200%">
+        <path class="ribbon__mask" d=""/>
+      </mask>
     </defs>
-    <path class="ribbon__shadow" d=""/>
-    <path class="ribbon__band" d=""/>
-    <path class="ribbon__stitch" d=""/>
+    <g mask="url(#ribbonReveal)">
+      <path class="ribbon__shadow" d=""/>
+      <path class="ribbon__band" d=""/>
+      <path class="ribbon__stitch" d=""/>
+    </g>
   </svg>
 
   <!-- ========== Prologue / Hero ========== -->
@@ -121,7 +126,7 @@
   <section class="concept section" id="concept" data-chapter="concept">
     <header class="chapter-head">
       <p class="chapter-head__no reveal">Chapter <span>I</span></p>
-      <h2 class="chapter-head__title"><span class="mask"><span>うちの子が、主役になる日。</span></span></h2>
+      <h2 class="chapter-head__title"><span class="mask"><span>うちの子が、<br class="sp">主役になる日。</span></span></h2>
       <svg class="flourish reveal" viewBox="0 0 240 24" aria-hidden="true"><use href="#orn-flourish"/></svg>
     </header>
     <div class="concept__body">
@@ -292,7 +297,7 @@
   <section class="order section" id="order" data-chapter="order">
     <header class="chapter-head chapter-head--light">
       <p class="chapter-head__no reveal">Chapter <span>VII</span></p>
-      <h2 class="chapter-head__title"><span class="mask"><span>あなたと、あの子だけの一点を。</span></span></h2>
+      <h2 class="chapter-head__title"><span class="mask"><span>あなたと、<br class="sp">あの子だけの一点を。</span></span></h2>
       <svg class="flourish reveal" viewBox="0 0 240 24" aria-hidden="true"><use href="#orn-flourish"/></svg>
     </header>
     <p class="order__lead reveal">サイズ変更・色違い・おそろいなどのオーダーは、Instagram の DM でご相談ください。<br class="pc">ご希望を伺ったうえで、お作りできるかどうかをお返事いたします。</p>
