@@ -83,7 +83,7 @@ section { position: relative; }
 
 .display {
   font-family: var(--f-ja); font-weight: 500;
-  font-size: clamp(28px, 4.1vw, 56px); line-height: 1.5; letter-spacing: .08em;
+  font-size: clamp(27px, 3.4vw, 48px); line-height: 1.55; letter-spacing: .08em;
   color: var(--ink);
 }
 .mask-h .ln { display: block; overflow: hidden; padding-bottom: .08em; }
@@ -224,7 +224,7 @@ body.menu-open .nav-toggle span { background: var(--cream); }
 .hero-eyebrow span { color: var(--gold-2); }
 .hero-title {
   font-family: var(--f-en); font-weight: 500; color: var(--teal-deep);
-  font-size: clamp(50px, 9.4vw, 148px); line-height: 1; letter-spacing: -.005em; margin: 6px 0 22px;
+  font-size: clamp(50px, 8.2vw, 128px); line-height: 1; letter-spacing: -.005em; margin: 6px 0 22px;
   white-space: nowrap;
 }
 .hero-title .t-and { font-style: italic; font-weight: 400; color: var(--teal-mid); }
@@ -238,8 +238,8 @@ body.menu-open .nav-toggle span { background: var(--cream); }
   box-shadow: 0 0 0 6px var(--cream), 0 0 0 7px rgba(217,185,121,.8), 0 30px 60px -24px rgba(36,65,63,.55);
 }
 .hero-float img { width: 100%; height: 100%; object-fit: cover; }
-.hero-float--l { left: clamp(36px, 7vw, 120px); top: 26%; }
-.hero-float--r { right: clamp(80px, 10vw, 170px); top: 44%; width: clamp(130px, 14vw, 210px); }
+.hero-float--l { left: clamp(36px, 7vw, 120px); top: 17%; width: clamp(140px, 15vw, 230px); }
+.hero-float--r { right: clamp(90px, 11vw, 180px); top: 13%; width: clamp(110px, 12vw, 190px); }
 .hero-scroll {
   position: absolute; z-index: 2; left: calc(var(--gutter) + 10px); bottom: 32px; display: flex; align-items: center; gap: 12px;
   font-family: var(--f-en); font-style: italic; letter-spacing: .2em; color: var(--teal-dark); text-decoration: none; font-size: 15px;
@@ -298,7 +298,7 @@ body.menu-open .nav-toggle span { background: var(--cream); }
 }
 .sig-photos img.is-active { opacity: 1; transform: none; }
 .sig-text { max-width: 520px; }
-.sig-title { font-family: var(--f-ja); font-weight: 500; font-size: clamp(26px, 2.8vw, 38px); letter-spacing: .1em; line-height: 1.5; }
+.sig-title { font-family: var(--f-ja); font-weight: 500; font-size: clamp(24px, 2.4vw, 34px); letter-spacing: .1em; line-height: 1.5; }
 .sig-title .en { display: block; font-family: var(--f-en); font-style: italic; font-weight: 400; font-size: .62em; color: var(--teal-dark); letter-spacing: .06em; }
 .sig-lead { font-size: clamp(17px, 1.6vw, 21px); margin: 18px 0 20px; line-height: 1.9; }
 .sig-features { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 20px; font-size: 13px; color: var(--ink-2); }
@@ -385,11 +385,13 @@ body.menu-open .nav-toggle span { background: var(--cream); }
 
 /* 横スクロール（PC・JS 有効・reduced-motion でないときだけ） */
 .pin-on .collection { height: 100vh; min-height: 640px; padding: 96px 0 0; display: flex; flex-direction: column; }
-.pin-on .col-head { margin-bottom: 26px; }
-.pin-on .col-head .display { font-size: clamp(28px, 3.2vw, 44px); }
+.pin-on .col-head { margin-bottom: 26px; flex-wrap: nowrap; align-items: end; }
+.pin-on .col-head .kicker { margin-bottom: 10px; }
+.pin-on .col-head .display { font-size: clamp(26px, 2.8vw, 40px); white-space: nowrap; }
+.pin-on .col-side { max-width: 700px; }
 .pin-on .hs { flex: 1; min-height: 0; }
 .pin-on .hs-track {
-  --cs: clamp(120px, calc((100vh - 400px) / 2 - 60px), 210px);
+  --cs: clamp(110px, calc((100vh - 480px) / 2), 210px);
   flex-direction: row; gap: clamp(60px, 7vw, 120px); max-width: none; margin: 0; width: max-content;
   padding: 0 30vw 0 var(--gutter); height: 100%; align-items: start; will-change: transform;
 }
@@ -400,14 +402,14 @@ body.menu-open .nav-toggle span { background: var(--cream); }
 }
 .pin-on .cat-grid.solo { grid-template-rows: auto; grid-auto-columns: calc(var(--cs) * 1.75); }
 .pin-on .cat-cape .cape-card { width: calc(var(--cs) * 1.6); }
-.pin-on .col-foot { margin-top: auto; padding-bottom: 28px; }
+.pin-on .col-foot { margin-top: auto; padding-bottom: 22px; padding-right: calc(var(--gutter) + 230px); font-size: 12px; line-height: 1.8; }
 .pin-on .hs-bar { display: block; }
 
 /* ---------- ORDER ---------- */
 .order {
   padding: clamp(110px, 14vw, 180px) 0;
-  background: var(--jacquard), radial-gradient(circle at 80% 10%, rgba(159,200,197,.35), transparent 40rem), linear-gradient(160deg, #3d6c69, var(--teal-deep));
-  background-size: 180px, auto, auto;
+  background: linear-gradient(rgba(36,65,63,.5), rgba(36,65,63,.5)), var(--jacquard), radial-gradient(circle at 80% 10%, rgba(159,200,197,.35), transparent 40rem), linear-gradient(160deg, #3d6c69, var(--teal-deep));
+  background-size: auto, 180px, auto, auto;
   color: var(--cream);
 }
 .order .display { color: var(--cream); }
@@ -480,8 +482,10 @@ body.menu-open .nav-toggle span { background: var(--cream); }
 .faq details a { color: var(--teal-dark); text-underline-offset: 3px; }
 
 /* ---------- FOOTER ---------- */
-.footer { position: relative; background: var(--teal-deep); color: var(--cream); padding: 110px 0 120px; text-align: center; overflow: hidden; }
+.footer { position: relative; background: var(--teal-deep); color: var(--cream); padding: 40px 0 120px; text-align: center; overflow: hidden; }
 .footer::before { content: ""; position: absolute; inset: 0; background: var(--jacquard); background-size: 160px; opacity: .5; }
+.footer-bow { position: relative; z-index: 2; display: block; width: 150px; height: auto; margin: 0 auto 26px; overflow: visible; --rw: 26px; }
+.footer-bow .rb { filter: drop-shadow(0 6px 10px rgba(0,0,0,.25)); }
 .footer-inner { display: grid; gap: 18px; justify-items: center; }
 .footer-logo { font-family: var(--f-en); font-size: clamp(36px, 5vw, 60px); line-height: 1; }
 .footer-catch { font-size: 13px; letter-spacing: .14em; color: var(--teal-light); }
@@ -514,6 +518,9 @@ body.menu-open .nav-toggle span { background: var(--cream); }
 .js-pending .mask-h .ln > span { opacity: 0; }
 
 /* ---------- responsive ---------- */
+@media (min-width: 900px) {
+  .display .ln, .sig-title { white-space: nowrap; }
+}
 @media (max-width: 1080px) {
   .nav-links { display: none; }
   .nav-toggle { display: block; }

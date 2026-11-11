@@ -345,7 +345,7 @@
         });
       });
       $$('.cat-head .en', track).forEach(function (en) {
-        gsap.fromTo(en, { x: 80 }, { x: 0, ease: 'none', scrollTrigger: { trigger: en, containerAnimation: tween, start: 'left right', end: 'left 40%', scrub: true } });
+        gsap.fromTo(en, { x: 40 }, { x: 0, ease: 'none', scrollTrigger: { trigger: en, containerAnimation: tween, start: 'left right', end: 'left 40%', scrub: true } });
       });
 
       ScrollTrigger.sort();
