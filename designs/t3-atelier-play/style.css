@@ -84,7 +84,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
 button { font: inherit; color: inherit; }
 ::selection { background: var(--teal-light); color: var(--ink); }
@@ -238,7 +238,7 @@ html.js .reveal.in, html.reveal-fallback .reveal { opacity: 1; transform: none; 
 .hero-title {
   position: relative; margin: 0 0 30px;
   font-family: var(--serif-en); font-weight: 500;
-  font-size: clamp(66px, 10.6vw, 170px); line-height: .84; letter-spacing: -.02em;
+  font-size: clamp(66px, 9vw, 150px); line-height: .86; letter-spacing: -.02em;
   perspective: 700px;
 }
 .ht-row { display: block; white-space: nowrap; }
@@ -339,11 +339,11 @@ html.js .reveal.in, html.reveal-fallback .reveal { opacity: 1; transform: none; 
    ============================================================ */
 .concept-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(14px, 2vw, 28px); align-items: start; }
 .concept .sec-label { grid-column: 1 / 7; grid-row: 1; }
-.concept-title { grid-column: 1 / 8; grid-row: 2; margin: 0 0 40px; font-family: var(--mincho); font-weight: 500; font-size: clamp(32px, 4.6vw, 66px); line-height: 1.45; letter-spacing: .06em; }
+.concept-title { grid-column: 1 / 8; grid-row: 2; margin: 0 0 40px; font-family: var(--mincho); font-weight: 500; font-size: clamp(30px, 3.9vw, 56px); line-height: 1.5; letter-spacing: .06em; }
 .concept-title em { font-style: normal; color: var(--em); position: relative; }
 .concept-title em::after { content: ""; position: absolute; left: 0; right: 0; bottom: .02em; height: .14em; background: repeating-linear-gradient(90deg, var(--accent) 0 3px, transparent 3px 6px); opacity: .55; transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease) .8s; }
 .concept-title.in em::after, html:not(.js) .concept-title em::after, html.reveal-fallback .concept-title em::after { transform: scaleX(1); }
-.d-line { display: block; }
+.d-line { display: block; white-space: nowrap; }
 html.js .concept-title .d-line { clip-path: inset(0 100% 0 0); transition: clip-path 1.2s var(--ease-io); }
 html.js .concept-title .d-line:nth-child(2) { transition-delay: .18s; }
 html.js .concept-title .d-line:nth-child(3) { transition-delay: .36s; }
@@ -359,7 +359,7 @@ html.js .concept-title.in .d-line, html.reveal-fallback .concept-title .d-line {
 .p2 { grid-column: 6 / 9; grid-row: 3 / 5; align-self: end; z-index: 2; margin-bottom: -30px; rotate: -4deg; }
 .p2 img { aspect-ratio: 1; border: 8px solid var(--cream); box-shadow: 0 24px 40px -22px rgba(31,54,53,.6); }
 .vcap { position: absolute; top: 0; right: -30px; writing-mode: vertical-rl; font-family: var(--mincho); font-size: 13px; letter-spacing: .3em; color: var(--fg-soft); }
-.p2 .vcap { right: auto; left: -30px; top: 12px; }
+.p2 .vcap { right: 0; left: auto; top: auto; bottom: -36px; writing-mode: horizontal-tb; letter-spacing: .1em; }
 .stats { grid-column: 1 / 6; grid-row: 4; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: clamp(18px, 3vw, 44px); list-style: none; margin: 40px 0 0; padding: 26px 0 0; border-top: 1px solid var(--line); }
 .stats li { display: flex; flex-direction: column; }
 .stats b { font-family: var(--serif-en); font-weight: 500; font-size: clamp(48px, 5.4vw, 80px); line-height: 1; font-variant-numeric: lining-nums tabular-nums; }

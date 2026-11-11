@@ -32,7 +32,7 @@
   /* ---------- Navigation ---------- */
   function initNav() {
     var nav = $('#nav'), btn = $('#navMenu');
-    var onScroll = function () { nav.classList.toggle('is-solid', window.scrollY > window.innerHeight * 0.6); };
+    var onScroll = function () { nav.classList.toggle('is-solid', window.scrollY > 80); };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     btn.addEventListener('click', function () {
@@ -66,7 +66,8 @@
     var html = '';
     CAT_ORDER.forEach(function (keys) {
       var key = keys[0];
-      var items = PRODUCTS.filter(function (p) { return keys.indexOf(p.category) > -1; });
+      var items = PRODUCTS.filter(function (p) { return keys.indexOf(p.category) > -1; })
+        .sort(function (a, b) { return keys.indexOf(a.category) - keys.indexOf(b.category); });
       if (!items.length) return;
       var cs = keys.map(function (k) { return CATS[k] || { ja: k, en: '', desc: '' }; });
       var c = {
