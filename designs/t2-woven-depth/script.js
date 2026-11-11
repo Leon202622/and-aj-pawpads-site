@@ -46,7 +46,8 @@
   }
 
   /* ---------- Collection (products.js) ---------- */
-  var CAT_ORDER = ['martingale', 'lead', 'memorial', 'chouchou', 'ribbon'];
+  // マーチンゲール首輪とリードはおそろいで選ぶことが多いので 1 ブロックにまとめる
+  var CAT_ORDER = [['martingale', 'lead'], ['memorial'], ['chouchou'], ['ribbon']];
   var CAT_LIMIT = { chouchou: 8 };
 
   function cardHTML(p) {
@@ -63,10 +64,16 @@
     var box = $('#cats');
     if (!box || !PRODUCTS.length) return;
     var html = '';
-    CAT_ORDER.forEach(function (key) {
-      var items = PRODUCTS.filter(function (p) { return p.category === key; });
+    CAT_ORDER.forEach(function (keys) {
+      var key = keys[0];
+      var items = PRODUCTS.filter(function (p) { return keys.indexOf(p.category) > -1; });
       if (!items.length) return;
-      var c = CATS[key] || { ja: key, en: '', desc: '' };
+      var cs = keys.map(function (k) { return CATS[k] || { ja: k, en: '', desc: '' }; });
+      var c = {
+        ja: cs.map(function (x) { return x.ja; }).join('・'),
+        en: cs.map(function (x) { return x.en; }).join(' & '),
+        desc: cs.map(function (x) { return x.desc; }).join(' ')
+      };
       var prices = items.map(function (p) { return p.price; });
       var lo = Math.min.apply(null, prices), hi = Math.max.apply(null, prices);
       var range = lo === hi ? yen(lo) : yen(lo) + '〜' + yen(hi);
@@ -221,10 +228,10 @@
 
     function layout() {
       W = ring.clientWidth;
-      mat = Math.round(clamp(W * 0.56, 170, 330));
+      mat = Math.round(clamp(W * 0.5, 160, 320));
       ring.style.setProperty('--mat', mat + 'px');
-      rx = (W - mat) / 2 * 1.02;
-      rz = mat * 1.05;
+      rx = (W - mat * 0.72) / 2;
+      rz = mat * 0.9;
     }
     function apply() {
       for (var i = 0; i < N; i++) {

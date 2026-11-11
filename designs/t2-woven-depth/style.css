@@ -479,7 +479,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
   height: clamp(320px, 36vw, 470px);
   perspective: 1400px;
   perspective-origin: 50% 40%;
-  transform-style: preserve-3d;
   cursor: grab;
 }
 .carousel.is-3d.is-drag .carousel__ring { cursor: grabbing; }
@@ -677,7 +676,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
    FAQ
    ============================================================ */
 .faq { padding: clamp(96px, 12vw, 160px) 0; background: var(--cream); }
-.faq__grid { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.faq__grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
 .qa { border-bottom: 1px solid rgba(53,97,95,.2); }
 .qa:first-child { border-top: 1px solid rgba(53,97,95,.2); }
 .qa summary {
