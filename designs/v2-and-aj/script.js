@@ -1,7 +1,8 @@
 /* ==========================================================
-   and AJ paw-pads — t1 "Ribbon Story"
+   and AJ — v2
    1) 共有データから商品・ギャラリーを描画（GSAP なしでも動く）
-   2) GSAP + ScrollTrigger が読めたときだけ「織り上がる物語」の演出
+   2) 色見本のクリック/タップ/キーボードで写真・色名・背景・リンクを切り替え
+   3) GSAP + ScrollTrigger が読めたときだけ演出（ピン留め・スナップ・横スクロールは使わない）
    ========================================================== */
 (function () {
   'use strict';
@@ -11,7 +12,6 @@
   var PRODUCTS = window.AJ_PRODUCTS || [];
   var CATS = window.AJ_CATEGORIES || {};
   var ARCHIVE = window.AJ_ARCHIVE || [];
-  var CREEMA = 'https://www.creema.jp/c/and_aj_pawpads';
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hasGsap = !!(window.gsap && window.ScrollTrigger);
 
@@ -23,13 +23,21 @@
     });
   };
   var yen = function (n) { return '¥' + Number(n).toLocaleString('ja-JP'); };
+  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
 
   /* ---------------------------------------------------------
-     Collection（マット → ケープ枠 → 他カテゴリ）
+     Collection（カテゴリごとに見出し＋グリッドを縦に並べる）
      --------------------------------------------------------- */
-  var ORDER = ['mat', 'cape', 'martingale', 'lead', 'memorial', 'chouchou', 'ribbon'];
-  var STORY = {
-    martingale: 'このサイトを縫うリボンの柄は、この首輪のジャカードリボンから生まれました。'
+  var ORDER = ['mat', 'memorial', 'martingale', 'lead', 'chouchou', 'ribbon'];
+
+  /* マーチンゲール首輪：色見本の色と英語名（商品データの color 名に対応） */
+  var MG_COLORS = {
+    'ベージュ': { en: 'Beige', sw: '#dcc9a6', accent: '#d9c39b' },
+    'アイスブルー': { en: 'Ice Blue', sw: '#a9c8d4', accent: '#9fc0cd' },
+    'ロイヤルブルー': { en: 'Royal Blue', sw: '#4f67b0', accent: '#7f93cc' },
+    'ミルキーピンク': { en: 'Milky Pink', sw: '#f0cccb', accent: '#efc2c2' },
+    'ディープピンク': { en: 'Deep Pink', sw: '#cf6b8b', accent: '#dc8aa3' },
+    'カーキグリーン': { en: 'Khaki Green', sw: '#97a072', accent: '#aab38a' }
   };
 
   function cardHTML(p) {
@@ -40,56 +48,109 @@
       '<p class="card-price">' + yen(p.price) + '<small>税込</small></p></a>';
   }
 
+  /* 色選びパネル（コレクション内で使う版）。カフェマット版は index.html に静的に書いてある */
+  function pickerHTML(id, ringText, items) {
+    var n = items.length;
+    var first = items[0];
+    return '<div class="pick pick--card" data-pick style="--accent:' + first.accent + '">' +
+      '<div class="pick-visual">' +
+        '<div class="pick-halo" aria-hidden="true"></div>' +
+        '<svg class="pick-ring" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><defs><path id="ring-' + id + '" d="M200 200 m-182 0 a182 182 0 1 1 364 0 a182 182 0 1 1 -364 0"/></defs>' +
+          '<text><textPath href="#ring-' + id + '">' + esc(ringText) + '</textPath></text></svg>' +
+        '<div class="pick-photos">' + items.map(function (it, i) {
+          return '<img' + (i === 0 ? ' class="is-active"' : '') + ' src="' + BASE + esc(it.img) + '" alt="' + esc(it.alt) + '" loading="lazy" width="800" height="800">';
+        }).join('') + '</div>' +
+      '</div>' +
+      '<div class="pick-text">' +
+        '<div class="pick-color" aria-live="polite">' +
+          '<span class="pick-no"><b data-no>01</b> / ' + pad(n) + '</span>' +
+          '<span class="pick-en" data-en>' + esc(first.en) + '</span>' +
+          '<span class="pick-ja" data-ja>' + esc(first.ja) + '</span>' +
+        '</div>' +
+        '<p class="pick-name" data-name>' + esc(first.name) + '</p>' +
+        '<div class="pick-row">' +
+          '<div class="pick-swatches" role="radiogroup" aria-label="カラーを選ぶ">' + items.map(function (it, i) {
+            return '<button type="button" class="sw' + (i === 0 ? ' is-active' : '') + '" role="radio" aria-checked="' + (i === 0) + '" tabindex="' + (i === 0 ? 0 : -1) + '"' +
+              ' style="--c:' + it.sw + '" aria-label="' + esc(it.ja) + '"' +
+              ' data-en="' + esc(it.en) + '" data-ja="' + esc(it.ja) + '" data-accent="' + it.accent + '"' +
+              ' data-url="' + esc(it.url) + '" data-price="' + yen(it.price) + '" data-name="' + esc(it.name) + '"></button>';
+          }).join('') + '</div>' +
+          '<span class="pick-hint" aria-hidden="true">色を選ぶ</span>' +
+        '</div>' +
+        '<div class="pick-buy">' +
+          '<p class="price"><span data-price>' + yen(first.price) + '</span><small>税込</small></p>' +
+          '<a class="btn btn-solid" data-link href="' + esc(first.url) + '" target="_blank" rel="noopener">この色を Creema で見る</a>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
   function renderCollection() {
-    var track = $('#track');
+    var wrap = $('#cats');
     var cape = $('#cat-cape');
     var chips = $('#chips');
-    if (!track || !cape) return;
+    if (!wrap || !cape) return;
     var no = 0;
-    var afterCape = false;
     ORDER.forEach(function (key) {
-      no++;
-      var label = 'No. ' + (no < 10 ? '0' : '') + no;
-      if (key === 'cape') {
-        afterCape = true;
-        $('.cat-no', cape).textContent = label;
-        addChip(chips, 'cape', 'ケープ（準備中）', true);
-        return;
-      }
       var cat = CATS[key];
       var items = PRODUCTS.filter(function (p) { return p.category === key; });
-      if (!cat || !items.length) { no--; return; }
+      if (!cat || !items.length) return;
+      no++;
       var prices = items.map(function (p) { return p.price; });
       var min = Math.min.apply(null, prices), max = Math.max.apply(null, prices);
+      var body;
+      var mgItems = key === 'martingale' ? items.filter(function (p) { return MG_COLORS[p.color]; }) : [];
+      if (mgItems.length === items.length && items.length > 1) {
+        body = pickerHTML('mg', 'MARTINGALE COLLAR · ORIENTAL JACQUARD RIBBON · GOLD HARDWARE · HANDMADE ·', items.map(function (p) {
+          var c = MG_COLORS[p.color];
+          return { en: c.en, ja: p.color, sw: c.sw, accent: c.accent, url: p.url, img: p.img, price: p.price, name: p.name,
+            alt: 'ジャカードリボンのマーチンゲール首輪（' + p.color + '）' };
+        }));
+      } else {
+        body = '<div class="cat-grid' + (items.length === 1 ? ' solo' : '') + '">' + items.map(cardHTML).join('') + '</div>';
+      }
       var el = document.createElement('article');
-      el.className = 'cat-panel';
+      el.className = 'cat';
       el.id = 'cat-' + key;
-      el.setAttribute('data-cat', key);
       el.innerHTML =
         '<header class="cat-head">' +
-          '<p class="cat-no">' + label + '</p>' +
+          '<p class="cat-no">No. ' + pad(no) + '</p>' +
           '<h3><span class="en">' + esc(cat.en) + '</span><span class="ja">' + esc(cat.ja) + '</span></h3>' +
           '<p class="cat-desc">' + esc(cat.desc) + '</p>' +
           '<p class="cat-meta">' + items.length + (items.length > 1 ? ' items' : ' item') + ' ・ ' +
             (min === max ? yen(min) : yen(min) + ' – ' + yen(max)) + '</p>' +
-          (STORY[key] ? '<p class="cat-story">' + esc(STORY[key]) + '</p>' : '') +
         '</header>' +
-        '<div class="cat-grid' + (items.length === 1 ? ' solo' : '') + '">' + items.map(cardHTML).join('') + '</div>';
-      if (afterCape) track.appendChild(el); else track.insertBefore(el, cape);
+        '<div class="cat-body">' + body + '</div>';
+      wrap.insertBefore(el, cape);
       addChip(chips, key, cat.ja + '（' + items.length + '）', false);
     });
+    $('.cat-no', cape).textContent = 'No. ' + pad(no + 1);
+    addChip(chips, 'cape', 'ケープ（準備中）', true);
+
     var stat = $('#statOnSale');
     if (stat && PRODUCTS.length) { stat.textContent = PRODUCTS.length; stat.setAttribute('data-count', PRODUCTS.length); }
   }
 
+  /* カテゴリボタン＝ページ内ジャンプ（普通の縦スクロール） */
   function addChip(wrap, key, text, soon) {
     if (!wrap) return;
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'chip' + (soon ? ' is-soon' : '');
-    b.setAttribute('data-target', 'cat-' + key);
-    b.textContent = text;
-    wrap.appendChild(b);
+    var a = document.createElement('a');
+    a.className = 'chip' + (soon ? ' is-soon' : '');
+    a.href = '#cat-' + key;
+    a.textContent = text;
+    wrap.appendChild(a);
+  }
+
+  function watchChips() {
+    if (!('IntersectionObserver' in window)) return;
+    var chips = $$('#chips .chip');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) { c.classList.toggle('is-active', c.getAttribute('href') === '#' + e.target.id); });
+      });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    $$('#cats .cat').forEach(function (c) { io.observe(c); });
   }
 
   /* ---------------------------------------------------------
@@ -109,52 +170,79 @@
   }
 
   /* ---------------------------------------------------------
-     Signature（カフェマット 4 色）
+     色選び（色見本を押すと 写真・色名・背景色・リンク が一緒に変わる）
      --------------------------------------------------------- */
-  var MATS = [
-    { en: 'Purple', ja: 'パープル', accent: '#b9a6dc', url: 'https://www.creema.jp/item/21012982/detail' },
-    { en: 'Milky Pink', ja: 'ミルキーピンク', accent: '#f0c4bf', url: 'https://www.creema.jp/item/21012971/detail' },
-    { en: 'White', ja: 'ホワイト', accent: '#cddcd8', url: 'https://www.creema.jp/item/21012962/detail' },
-    { en: 'Rouge Pink', ja: 'ルージュピンク', accent: '#e46f7a', url: 'https://www.creema.jp/item/21012947/detail' }
-  ];
-  var matIndex = 0;
-  var sigST = null;
-
-  function setMat(i) {
-    if (i === matIndex) return;
-    matIndex = i;
-    var m = MATS[i];
-    var sig = $('#signature');
-    sig.style.setProperty('--accent', m.accent);
-    $$('.sig-photos img').forEach(function (img, k) { img.classList.toggle('is-active', k === i); });
-    $$('.sw').forEach(function (b, k) {
-      b.classList.toggle('is-active', k === i);
-      b.setAttribute('aria-pressed', k === i ? 'true' : 'false');
-    });
-    var en = $('#sigEn'), ja = $('#sigJa'), no = $('#sigNo');
-    var swap = function () { en.textContent = m.en; ja.textContent = m.ja; no.textContent = '0' + (i + 1); };
-    if (hasGsap && !reduce) {
-      gsap.timeline()
-        .to([en, ja], { yPercent: -40, opacity: 0, duration: .22, ease: 'power2.in', onComplete: swap })
-        .fromTo([en, ja], { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .5, ease: 'power3.out', stagger: .06 });
-    } else swap();
-    $('#sigLink').href = m.url;
+  function swapText(el, text) {
+    if (!el || el.textContent === text) return;
+    if (reduce || !el.animate) { el.textContent = text; return; }
+    var token = (el._swap || 0) + 1;
+    el._swap = token;
+    var out = el.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-30%)' }],
+      { duration: 180, easing: 'cubic-bezier(.5,0,.75,0)', fill: 'forwards' });
+    out.onfinish = function () {
+      if (el._swap !== token) return;
+      el.textContent = text;
+      var inn = el.animate([{ opacity: 0, transform: 'translateY(30%)' }, { opacity: 1, transform: 'none' }],
+        { duration: 460, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
+      inn.onfinish = function () { if (el._swap === token) { out.cancel(); inn.cancel(); } };
+    };
   }
 
-  function bindSignature() {
-    $$('.sw').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var i = Number(b.getAttribute('data-i'));
-        if (sigST && sigST.isActive !== undefined && root.classList.contains('pin-on')) {
-          var y = sigST.start + (sigST.end - sigST.start) * (i / 3) + (i === 0 ? 2 : 0);
-          window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
-        } else setMat(i);
+  function initPicker(pick) {
+    var sws = $$('.sw', pick);
+    var photos = $$('.pick-photos img', pick);
+    var group = $('.pick-swatches', pick);
+    var ring = $('.pick-ring', pick);
+    var link = $('a[data-link]', pick);
+    var accentTarget = pick.closest('.sig') || pick;
+    var total = sws.length;
+    var cur = 0, turns = 0;
+
+    function select(i, focus) {
+      i = (i + total) % total;
+      if (focus) sws[i].focus();
+      if (i === cur) return;
+      cur = i;
+      var d = sws[i].dataset;
+      sws.forEach(function (b, k) {
+        var on = k === i;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-checked', on ? 'true' : 'false');
+        b.tabIndex = on ? 0 : -1;
       });
+      photos.forEach(function (img, k) { img.classList.toggle('is-active', k === i); });
+      accentTarget.style.setProperty('--accent', d.accent);
+      turns++;
+      if (ring) ring.style.setProperty('--ring', (turns * 60) + 'deg');
+      $('b[data-no]', pick).textContent = pad(i + 1);
+      swapText($('span[data-en]', pick), d.en);
+      swapText($('span[data-ja]', pick), d.ja);
+      if (d.price) swapText($('span[data-price]', pick), d.price);
+      if (d.name) swapText($('p[data-name]', pick), d.name);
+      if (link) {
+        link.href = d.url;
+        link.setAttribute('aria-label', d.ja + 'を Creema で見る（新しいタブ）');
+      }
+    }
+
+    sws.forEach(function (b, k) {
+      b.addEventListener('click', function () { pick.classList.add('is-touched'); select(k); });
+    });
+    group.addEventListener('keydown', function (e) {
+      var map = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+      var next = null;
+      if (e.key in map) next = cur + map[e.key];
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = total - 1;
+      if (next === null) return;
+      e.preventDefault();
+      pick.classList.add('is-touched');
+      select(next, true);
     });
   }
 
   /* ---------------------------------------------------------
-     Nav / menu / sticky buy / 進捗リボン
+     Nav / menu / sticky buy / 進捗のジャカード帯
      --------------------------------------------------------- */
   function bindChrome() {
     var nav = $('#nav'), menu = $('#menu'), toggle = $('.nav-toggle'), buy = $('#stickyBuy');
@@ -180,28 +268,11 @@
     };
     window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
     onScroll();
-
-    // カテゴリチップ（ピン留め時は横スクロール位置へ）
-    $('#chips').addEventListener('click', function (e) {
-      var b = e.target.closest('.chip');
-      if (!b) return;
-      var panel = document.getElementById(b.getAttribute('data-target'));
-      if (!panel) return;
-      if (colST && root.classList.contains('pin-on')) {
-        var gutter = parseFloat(getComputedStyle($('#track')).paddingLeft) || 0;
-        var y = colST.start + Math.max(0, Math.min(panel.offsetLeft - gutter, colST.end - colST.start));
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      } else {
-        panel.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-      }
-    });
   }
 
   /* ---------------------------------------------------------
-     Motion（GSAP）
+     Motion（GSAP）— ピン留め・スナップ・横スクロールは使わない
      --------------------------------------------------------- */
-  var colST = null;
-
   function splitTitle(h) {
     var out = [];
     Array.prototype.slice.call(h.childNodes).forEach(function (node) {
@@ -221,21 +292,20 @@
 
   function heroIntro() {
     var chars = splitTitle($('.hero-title'));
-    var masks = $$('.bw-m');
-    gsap.set(masks, { strokeDashoffset: 1 });
     var tl = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: .15 });
-    tl.to(masks[0], { strokeDashoffset: 0, duration: .9, ease: 'power2.inOut' })
-      .to([masks[1], masks[2]], { strokeDashoffset: 0, duration: .85, ease: 'power2.inOut' }, '-=.1')
-      .from('.bw-knot', { scale: 0, rotate: -40, duration: .7, ease: 'back.out(2.2)' }, '-=.35')
-      .to([masks[3], masks[4]], { strokeDashoffset: 0, duration: 1.1, ease: 'power2.out' }, '-=.45')
-      .from('.hero-medal', { scale: .5, opacity: 0, duration: .9, ease: 'back.out(1.6)' }, '-=1.0')
-      .from('.hero-eyebrow', { y: 14, opacity: 0, duration: .7 }, '-=.6')
-      .from(chars, { yPercent: 115, duration: 1, ease: 'power4.out', stagger: .045 }, '-=.55')
-      .from('.hero-catch .ln > span', { yPercent: 110, duration: 1, ease: 'power4.out', stagger: .14 }, '-=.75')
-      .from('.hero-cta > *', { y: 20, opacity: 0, duration: .7, stagger: .1 }, '-=.6')
+    // ロゴのメダリオン：金の縁が描かれ、ロゴがふわっと現れる
+    tl.fromTo('.mr-line', { strokeDasharray: '1 1', strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.5, ease: 'power2.inOut' }, 0)
+      .from('.mr-pearl', { opacity: 0, rotate: -40, transformOrigin: '50% 50%', duration: 1.6, ease: 'power2.out' }, .3)
+      .from('.medal-face', { scale: .82, opacity: 0, filter: 'blur(10px)', duration: 1.4, ease: 'power3.out' }, .2)
+      .from('.medal-face img', { scale: 1.6, duration: 2, ease: 'power3.out' }, .2)
+      .from('.hero-eyebrow', { y: 14, opacity: 0, duration: .7 }, .9)
+      .from(chars, { yPercent: 115, duration: 1, ease: 'power4.out', stagger: .06 }, 1.0)
+      .from('.hero-tagline', { opacity: 0, letterSpacing: '.6em', duration: 1.2, ease: 'power2.out' }, 1.3)
+      .from('.hero-catch .ln > span', { yPercent: 110, duration: 1, ease: 'power4.out', stagger: .14 }, 1.4)
+      .from('.hero-cta > *', { y: 20, opacity: 0, duration: .7, stagger: .1 }, 1.8)
       .fromTo('.hero-float img', { clipPath: 'inset(100% 0% 0% 0%)', scale: 1.3 },
-        { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 1.4, ease: 'power3.inOut', stagger: .2 }, .7)
-      .from('.hero-float', { opacity: 0, duration: .01 }, .7);
+        { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 1.4, ease: 'power3.inOut', stagger: .2 }, .6)
+      .from('.hero-float', { opacity: 0, duration: .01 }, .6);
   }
 
   function scrollReveals() {
@@ -264,13 +334,27 @@
         scrollTrigger: { trigger: ph, start: 'top 90%' }
       });
     });
-    // パララックス
+    // 色選びパネル：円がふわっと現れる
+    $$('.pick').forEach(function (p) {
+      gsap.from($('.pick-visual', p), { scale: .86, rotate: -10, opacity: 0, duration: 1.3, ease: 'power3.out', scrollTrigger: { trigger: p, start: 'top 78%' } });
+    });
+    // カテゴリ：見出しと商品カードが順に現れる
+    $$('.cat').forEach(function (cat) {
+      gsap.from($('.cat-head', cat), { y: 30, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: cat, start: 'top 86%' } });
+    });
+    $$('.cat-grid').forEach(function (grid) {
+      gsap.from($$('.card', grid), {
+        y: 34, opacity: 0, duration: .9, ease: 'power3.out', stagger: { each: .06, grid: 'auto' },
+        scrollTrigger: { trigger: grid, start: 'top 88%' }
+      });
+    });
+    // 軽いパララックス
     $$('[data-speed]').forEach(function (el) {
       var s = parseFloat(el.getAttribute('data-speed')) || .2;
       gsap.to(el, { yPercent: -s * 40, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
     gsap.to('.hero-loom', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.to('.hero-inner', { y: -70, opacity: .15, ease: 'none', scrollTrigger: { trigger: '.hero', start: '30% top', end: 'bottom top', scrub: true } });
+    gsap.to('.hero-inner', { y: -60, opacity: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: '35% top', end: 'bottom top', scrub: true } });
     var cols = $$('.gal-col');
     if (cols[1]) gsap.to(cols[1], { y: -90, ease: 'none', scrollTrigger: { trigger: '#galGrid', start: 'top bottom', end: 'bottom top', scrub: true } });
     if (cols[2]) gsap.to(cols[2], { y: -40, ease: 'none', scrollTrigger: { trigger: '#galGrid', start: 'top bottom', end: 'bottom top', scrub: true } });
@@ -285,186 +369,28 @@
         onUpdate: function () { el.textContent = Math.round(o.v); }
       });
     });
-    // Instagram のリボン帯
-    var mq = $('.insta-marquee');
-    if (mq) {
-      mq.innerHTML += mq.innerHTML;
-      gsap.fromTo(mq, { xPercent: -4 }, { xPercent: -36, ease: 'none', scrollTrigger: { trigger: '.insta', start: 'top bottom', end: 'bottom top', scrub: true } });
-    }
-  }
-
-  function pinnedScenes() {
-    var mm = gsap.matchMedia();
-    mm.add('(min-width: 900px)', function () {
-      root.classList.add('pin-on');
-
-      /* --- Signature: 4 色がスクロールで切り替わる --- */
-      var sig = $('#signature');
-      var ring = $('.sig-ring');
-      var prog = $('.sig-progress');
-      sigST = ScrollTrigger.create({
-        trigger: sig, pin: true, start: 'top top',
-        end: function () { return '+=' + Math.round(window.innerHeight * 2.4); },
-        snap: { snapTo: [0, 1 / 3, 2 / 3, 1], duration: { min: .25, max: .7 }, delay: .12, ease: 'power2.inOut' },
-        onUpdate: function (self) {
-          setMat(Math.min(3, Math.round(self.progress * 3)));
-          gsap.set(ring, { rotate: self.progress * 220 });
-          prog.style.setProperty('--p', self.progress.toFixed(3));
-        }
-      });
-      gsap.from('.sig-visual', { scale: .82, rotate: -12, opacity: 0, duration: 1.3, ease: 'power3.out', scrollTrigger: { trigger: sig, start: 'top 75%' } });
-      gsap.from('.sig-text > *', { y: 30, opacity: 0, duration: .9, ease: 'power3.out', stagger: .07, scrollTrigger: { trigger: sig, start: 'top 60%' } });
-
-      /* --- Collection: 横スクロールでカテゴリを巡る --- */
-      var col = $('#collection');
-      var track = $('#track');
-      var bar = $('.hs-bar');
-      var chips = $$('.chip');
-      var panels = $$('.cat-panel', track);
-      var dist = function () { return Math.max(0, track.scrollWidth - root.clientWidth); };
-      var tween = gsap.to(track, {
-        x: function () { return -dist(); }, ease: 'none',
-        scrollTrigger: {
-          trigger: col, pin: true, start: 'top top', scrub: .6, invalidateOnRefresh: true,
-          end: function () { return '+=' + dist(); },
-          onUpdate: function (self) {
-            bar.style.setProperty('--p', self.progress.toFixed(3));
-            var x = self.progress * dist() + root.clientWidth * .45;
-            var cur = 0;
-            panels.forEach(function (p, k) { if (p.offsetLeft <= x) cur = k; });
-            chips.forEach(function (c, k) { c.classList.toggle('is-active', k === cur); });
-          }
-        }
-      });
-      colST = tween.scrollTrigger;
-      // カード写真がスライドインに合わせて寄ってくる
-      $$('.card-img img, .cape-ph', track).forEach(function (img) {
-        gsap.fromTo(img, { scale: 1.25, opacity: .3 }, {
-          scale: 1, opacity: 1, ease: 'none',
-          scrollTrigger: { trigger: img, containerAnimation: tween, start: 'left 105%', end: 'left 65%', scrub: true }
-        });
-      });
-      $$('.cat-head .en', track).forEach(function (en) {
-        gsap.fromTo(en, { x: 40 }, { x: 0, ease: 'none', scrollTrigger: { trigger: en, containerAnimation: tween, start: 'left right', end: 'left 40%', scrub: true } });
-      });
-
-      ScrollTrigger.sort();
-      return function () {
-        root.classList.remove('pin-on');
-        sigST = null; colST = null;
-        gsap.set(track, { clearProps: 'transform' });
-      };
-    });
-  }
-
-  /* --- ページ全体を縫うリボン --- */
-  function threadScene() {
-    var svg = $('.thread');
-    if (!svg) return;
-    var NS = 'http://www.w3.org/2000/svg';
-    var layers = ['edge', 'body', 'inner', 'weave', 'gold'];
-    svg.innerHTML =
-      '<defs><mask id="th-mask" maskUnits="userSpaceOnUse"><path class="thread-mask"/></mask></defs>' +
-      '<g mask="url(#th-mask)"><g class="rb">' + layers.map(function (c) { return '<path class="rb-' + c + '"/>'; }).join('') + '</g></g>' +
-      '<circle class="thread-pearl" r="6" cx="-50" cy="-50"/>';
-    var mask = $('#th-mask', svg), mpath = $('.thread-mask', svg), paths = $$('.rb path', svg), pearl = $('.thread-pearl', svg);
-    var samples = [], L = 0, cur = 0, target = 0;
-
-    function build() {
-      svg.style.height = '0px';
-      var W = root.clientWidth, H = root.scrollHeight, mobile = W < 900;
-      svg.style.height = H + 'px';
-      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      ['x', 'y'].forEach(function (a) { mask.setAttribute(a, 0); });
-      mask.setAttribute('width', W); mask.setAttribute('height', H);
-      var pts = [];
-      $$('[data-thread]').forEach(function (el) {
-        var box = el.parentElement && el.parentElement.classList.contains('pin-spacer') ? el.parentElement : el;
-        var r = box.getBoundingClientRect(), top = r.top + window.scrollY;
-        el.getAttribute(mobile && el.hasAttribute('data-thread-m') ? 'data-thread-m' : 'data-thread').split(/\s+/).forEach(function (s) {
-          var v = s.split('@'), fx = parseFloat(v[0]), fy = parseFloat(v[1]);
-          var x = fx * W;
-          if (mobile) x = fx < .2 ? 11 : fx > .8 ? W - 11 : x;
-          else x = Math.max(40, Math.min(W - 40, x));
-          pts.push([x, top + fy * r.height]);
-        });
-      });
-      pts.sort(function (a, b) { return a[1] - b[1]; });
-      if (pts.length < 2) return;
-      var d = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
-      for (var i = 0; i < pts.length - 1; i++) {
-        var p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
-        var c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = p1[1] + (p2[1] - p0[1]) / 6;
-        var c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = p2[1] - (p3[1] - p1[1]) / 6;
-        d += ' C' + [c1x, c1y, c2x, c2y, p2[0], p2[1]].map(function (n) { return n.toFixed(1); }).join(' ');
-      }
-      mpath.setAttribute('d', d);
-      paths.forEach(function (p) { p.setAttribute('d', d); });
-      L = mpath.getTotalLength();
-      mpath.style.strokeDasharray = L + ' ' + (L + 10);
-      samples = [];
-      var n = Math.max(200, Math.round(L / 18)), maxY = -Infinity;
-      for (var k = 0; k <= n; k++) {
-        var l = L * k / n, pt = mpath.getPointAtLength(l);
-        maxY = Math.max(maxY, pt.y);
-        samples.push({ l: l, x: pt.x, y: maxY, px: pt.y });
-      }
-      cur = target = lengthAt(tipY());
-      render(true);
-    }
-    function tipY() { return window.scrollY + window.innerHeight * .74; }
-    function lengthAt(y) {
-      if (!samples.length) return 0;
-      if (y <= samples[0].y) return 0;
-      var lo = 0, hi = samples.length - 1;
-      if (y >= samples[hi].y) return L;
-      while (hi - lo > 1) { var mid = (lo + hi) >> 1; if (samples[mid].y < y) lo = mid; else hi = mid; }
-      var a = samples[lo], b = samples[hi], t = (y - a.y) / ((b.y - a.y) || 1);
-      return a.l + (b.l - a.l) * t;
-    }
-    function pointAt(l) {
-      var i = Math.min(samples.length - 1, Math.round(l / L * (samples.length - 1)));
-      return samples[i] || { x: -50, px: -50 };
-    }
-    function render(force) {
-      mpath.style.strokeDashoffset = (L - cur).toFixed(1);
-      var p = pointAt(cur);
-      pearl.setAttribute('cx', p.x.toFixed(1));
-      pearl.setAttribute('cy', p.px.toFixed(1));
-      pearl.style.opacity = cur > 4 && cur < L - 4 ? 1 : 0;
-    }
-    gsap.ticker.add(function () {
-      target = lengthAt(tipY());
-      var diff = target - cur;
-      if (Math.abs(diff) < .4) return;
-      cur += diff * .14;
-      render();
-    });
-    ScrollTrigger.addEventListener('refresh', build);
-    build();
   }
 
   function initMotion() {
     gsap.registerPlugin(ScrollTrigger);
     root.classList.remove('js-pending'); // 以降は GSAP が初期状態を管理
-    pinnedScenes();
     heroIntro();
     scrollReveals();
-    threadScene();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
     window.addEventListener('load', function () { ScrollTrigger.refresh(); });
   }
 
   /* --------------------------------------------------------- */
-  try { renderCollection(); } catch (e) { console.warn(e); }
+  try { renderCollection(); watchChips(); } catch (e) { console.warn(e); }
   try { renderGallery(); } catch (e) { console.warn(e); }
-  try { bindSignature(); bindChrome(); } catch (e) { console.warn(e); }
+  try { $$('[data-pick]').forEach(initPicker); } catch (e) { console.warn(e); }
+  try { bindChrome(); } catch (e) { console.warn(e); }
 
   if (hasGsap && !reduce) {
     try { initMotion(); }
     catch (e) {
       console.warn('motion disabled:', e);
-      root.classList.remove('js-pending', 'pin-on');
+      root.classList.remove('js-pending');
       if (window.gsap) gsap.globalTimeline.clear();
     }
   } else {
