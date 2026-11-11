@@ -193,6 +193,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
 .nav.is-solid .nav__shop { background: var(--teal-dark); color: var(--cream); }
 .nav__menu { display: none; }
 
+html:not(.js) .nav { background: rgba(53,97,95,.94); }
+
 /* ── Reveal（JS 有効時のみ初期非表示） ── */
 .js .rv { opacity: 0; transform: translate3d(0, 28px, 0); filter: blur(4px); }
 .js .rv.is-in, .reveal-all .rv {
@@ -764,7 +766,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
   }
   .nav.is-open { background: rgba(255,250,241,.97); color: var(--ink); }
   .nav.is-open .nav__shop { background: var(--teal-dark); color: var(--cream); }
-  html:not(.js) .nav__links { display: flex; overflow-x: auto; }
   html:not(.js) .nav__menu { display: none; }
 }
 

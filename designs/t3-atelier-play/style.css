@@ -134,7 +134,7 @@ button { font: inherit; color: inherit; }
 
 /* ── 共通レイアウト ── */
 .wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px); }
-.sec { position: relative; padding: clamp(96px, 13vw, 190px) 0; }
+.sec { position: relative; padding: clamp(80px, 9vw, 140px) 0; }
 
 .sec-label {
   display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
@@ -236,7 +236,7 @@ html.js .reveal.in, html.reveal-fallback .reveal { opacity: 1; transform: none; 
 .kicker-line { width: 54px; height: 6px; background: var(--ribbon-pattern-h); background-size: auto 6px; box-shadow: 0 0 0 1px rgba(255,250,241,.5); }
 
 .hero-title {
-  position: relative; margin: 0 0 30px;
+  position: relative; margin: 0 0 44px;
   font-family: var(--serif-en); font-weight: 500;
   font-size: clamp(66px, 9vw, 150px); line-height: .86; letter-spacing: -.02em;
   perspective: 700px;
@@ -385,7 +385,8 @@ html.js .concept-title.in .d-line, html.reveal-fallback .concept-title .d-line {
 .cp-tab small { font-family: var(--serif-en); font-style: italic; font-weight: 400; font-size: 13px; opacity: .7; margin-left: 4px; }
 .cp-tab[aria-selected="true"] { background: var(--teal-dark); color: var(--cream); }
 .swatches { display: flex; flex-wrap: wrap; gap: 14px 16px; margin-bottom: 30px; min-height: 76px; }
-.sw { display: flex; flex-direction: column; align-items: center; gap: 6px; border: 0; background: none; padding: 0; cursor: pointer; width: 64px; }
+.sw { display: flex; flex-direction: column; align-items: center; gap: 6px; border: 0; background: none; padding: 0; cursor: pointer; width: 78px; }
+.sw span { white-space: nowrap; }
 .sw i {
   display: block; width: 46px; height: 46px; border-radius: 50%; background: var(--c);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.12), 0 0 0 3px var(--cream), 0 0 0 4px var(--line);
@@ -508,8 +509,8 @@ html.reveal-fallback .grid .card { opacity: 1; }
 .order .sec-label { grid-column: 1 / -1; }
 .order-vertical {
   writing-mode: vertical-rl; margin: 0; font-family: var(--mincho); font-weight: 500;
-  font-size: clamp(28px, 3.6vw, 50px); letter-spacing: .3em; line-height: 1.6; color: var(--accent);
-  padding: 0 0 0 28px; border-left: 1px solid var(--line); max-height: 15em;
+  font-size: clamp(24px, 2.4vw, 34px); letter-spacing: .24em; line-height: 1.7; color: var(--em);
+  padding: 0 0 0 28px; border-left: 1px solid var(--line); height: 9.5em; align-self: start;
 }
 .order-title { margin: 0; }
 .order-title .big-en { display: block; }
@@ -750,9 +751,12 @@ html.qv-open { overflow: hidden; }
   .logo { font-size: 18px; gap: 8px; }
   .logo img { width: 28px; height: 28px; }
   .hero { padding-left: 18px; padding-right: 18px; }
-  .hero-title { font-size: clamp(58px, 19vw, 84px); }
-  .hero-copy { padding-right: 40px; }
-  .hero-vertical { right: 14px; top: 92px; font-size: 13.5px; }
+  .hero-title { font-size: clamp(50px, 15.5vw, 76px); }
+  .hero-copy { padding-right: 34px; }
+  .hero-vertical { right: 10px; top: 92px; font-size: 13px; letter-spacing: .16em; }
+  .maker-quote { font-size: 21px; letter-spacing: .03em; }
+  .sw { width: 64px; }
+  .sw span { font-size: 10px; }
   .hero-lead { font-size: 14px; }
   .hero-cta .btn { flex: 1 1 auto; }
   .collage { width: 96%; }
@@ -767,7 +771,6 @@ html.qv-open { overflow: hidden; }
   .stats span { font-size: 11px; }
   .cp-frame { margin: 18px; }
   .cp-cap { font-size: 30px; bottom: 2%; }
-  .sw { width: 56px; }
   .sw i { width: 40px; height: 40px; }
   .cp-tab { padding: 8px 12px; font-size: 12px; }
   .cp-tab small { display: none; }
