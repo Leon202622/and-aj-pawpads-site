@@ -381,10 +381,10 @@
       $$('[data-thread]').forEach(function (el) {
         var box = el.parentElement && el.parentElement.classList.contains('pin-spacer') ? el.parentElement : el;
         var r = box.getBoundingClientRect(), top = r.top + window.scrollY;
-        el.getAttribute('data-thread').split(/\s+/).forEach(function (s) {
+        el.getAttribute(mobile && el.hasAttribute('data-thread-m') ? 'data-thread-m' : 'data-thread').split(/\s+/).forEach(function (s) {
           var v = s.split('@'), fx = parseFloat(v[0]), fy = parseFloat(v[1]);
           var x = fx * W;
-          if (mobile) x = fx < .2 ? 13 : fx > .8 ? W - 13 : x;
+          if (mobile) x = fx < .2 ? 11 : fx > .8 ? W - 11 : x;
           else x = Math.max(40, Math.min(W - 40, x));
           pts.push([x, top + fy * r.height]);
         });

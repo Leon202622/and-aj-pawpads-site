@@ -790,6 +790,7 @@ html:not(.js) .nav { background: rgba(53,97,95,.94); }
   .card__meta { flex-wrap: wrap; }
   .card__price { font-size: 1.15rem; }
   .cat__head { grid-template-columns: 1fr; gap: 8px; }
+  .cat__ja { font-size: 1.3rem; letter-spacing: .06em; }
   .maker__photo { width: min(220px, 60%); }
   .maker__quote { font-size: 1.3rem; letter-spacing: .08em; }
   .hero__scroll { display: none; }

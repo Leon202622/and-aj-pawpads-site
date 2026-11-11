@@ -526,7 +526,7 @@ body.menu-open .nav-toggle span { background: var(--cream); }
   .nav-toggle { display: block; }
 }
 @media (max-width: 899px) {
-  :root { --rw: 16px; }
+  :root { --rw: 12px; }
   body { font-size: 14.5px; }
   .edge-ribbon { width: 6px; }
   .edge-fill { background-size: 6px auto; }
@@ -536,8 +536,8 @@ body.menu-open .nav-toggle span { background: var(--cream); }
   .nav-shop { padding: 7px 14px; font-size: 12px; }
   .hero { min-height: 100svh; padding-bottom: 96px; }
   .hero::before { width: 14px; right: 12px; background-size: 14px auto; }
-  .hero-float--l { width: 104px; left: 14px; top: 92px; }
-  .hero-float--r { width: 92px; right: 34px; top: 132px; }
+  .hero-float--l { width: 92px; left: 16px; top: 236px; }
+  .hero-float--r { width: 84px; right: 36px; top: 262px; }
   .hero-inner { padding-top: 168px; }
   .hero-title { font-size: clamp(44px, 12.5vw, 64px); margin-bottom: 16px; }
   .hero-catch { letter-spacing: .12em; }
