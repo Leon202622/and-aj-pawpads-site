@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ja" data-tone="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>and AJ paw-pads | Atelier — handmade pet accessories</title>
+  <meta name="description" content="and AJ paw-pads — 上品さと写真映えにこだわったハンドメイドペットアクセサリー。パールフリルのカフェマット、ジャカードリボンのマーチンゲール首輪・リードを一つひとつ手作りしています。" />
+  <meta property="og:title" content="and AJ paw-pads" />
+  <meta property="og:description" content="愛犬とのお出かけを、もっと美しく、もっと特別に。" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#9fc8c5" />
+  <!-- JS が動くときだけ「初期非表示 → 出現」演出を有効化。main script が 3 秒以内に起動しなければ全表示に戻す -->
+  <script>
+    document.documentElement.classList.add('js');
+    setTimeout(function () { if (!window.AJ_BOOTED) document.documentElement.classList.add('reveal-fallback'); }, 3000);
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Shippori+Mincho:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip" href="#concept">本文へスキップ</a>
+
+  <!-- 背景: ジャカード織り柄（トーンに合わせて白線／ティール線が切り替わる） -->
+  <div class="backdrop" aria-hidden="true"><span class="bd-light"></span><span class="bd-dark"></span></div>
+
+  <!-- ページ左縁を走るジャカードリボン ＋ スクロール進捗で伸びるアクセントリボン -->
+  <div class="rail" aria-hidden="true">
+    <span class="rail-progress"></span>
+    <span class="rail-buckle"></span>
+  </div>
+
+  <!-- カスタムカーソル（PC・ポインタ精密環境のみ JS で有効化） -->
+  <div class="cursor" aria-hidden="true"><span class="cursor-dot"></span><span class="cursor-ring"><b class="cursor-label"></b></span></div>
+
+  <!-- ══ Header ══ -->
+  <header class="site-head" id="siteHead">
+    <a class="logo" href="#top" aria-label="and AJ paw-pads トップへ">
+      <img src="../../assets/images/creema-icon.jpg" alt="" width="36" height="36" />
+      <span><i>and</i> AJ paw-pads</span>
+    </a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="siteNav">
+      <span class="menu-lines" aria-hidden="true"></span><span class="menu-txt">Menu</span>
+    </button>
+    <nav class="site-nav" id="siteNav" aria-label="メインナビゲーション">
+      <ul>
+        <li><a class="ulink" href="#concept">Concept</a></li>
+        <li><a class="ulink" href="#colors">Colours</a></li>
+        <li><a class="ulink" href="#collection">Collection</a></li>
+        <li><a class="ulink" href="#order">Order</a></li>
+        <li><a class="ulink" href="#maker">Maker</a></li>
+        <li><a class="ulink" href="#gallery">Gallery</a></li>
+        <li><a class="ulink" href="#faq">FAQ</a></li>
+      </ul>
+      <a class="btn btn-shop magnetic" href="https://www.creema.jp/c/and_aj_pawpads" target="_blank" rel="noopener" data-cursor="Buy">Creema Shop<span class="arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ══ HERO ══ -->
+    <section class="hero" data-tone="light" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <p class="kicker"><span class="kicker-line" aria-hidden="true"></span>Handmade pet accessories — Saitama</p>
+        <h1 class="hero-title" id="heroTitle" aria-label="and AJ paw-pads">
+          <span class="ht-row" aria-hidden="true"><span class="ch it" style="--i:0">a</span><span class="ch it" style="--i:1">n</span><span class="ch it" style="--i:2">d</span><span class="ch sp" style="--i:3"> </span><span class="ch" style="--i:4">A</span><span class="ch" style="--i:5">J</span></span>
+          <span class="ht-row ht-row2" aria-hidden="true"><span class="ch" style="--i:6">p</span><span class="ch" style="--i:7">a</span><span class="ch" style="--i:8">w</span><span class="ch dash" style="--i:9">-</span><span class="ch" style="--i:10">p</span><span class="ch" style="--i:11">a</span><span class="ch" style="--i:12">d</span><span class="ch" style="--i:13">s</span></span>
+          <span class="ht-thread" aria-hidden="true"></span>
+        </h1>
+        <p class="hero-lead">上品さと写真映えにこだわった、<br class="sp-only">一つひとつ手作りのペットアクセサリー。<br>大人の飼い主さまと、愛犬・愛猫のために。</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary magnetic" href="#collection">Collection を見る</a>
+          <a class="btn btn-line magnetic" href="https://www.creema.jp/c/and_aj_pawpads" target="_blank" rel="noopener" data-cursor="Buy">Creema で購入<span class="arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <p class="hero-vertical" lang="ja">
+        <span class="hv-line" style="--d:.9s">愛犬とのお出かけを、</span>
+        <span class="hv-line" style="--d:1.25s">もっと美しく、もっと特別に。</span>
+      </p>
+
+      <!-- 写真コラージュ: マウスでふわり、ドラッグ／スワイプでめくって並べ替え -->
+      <div class="collage" id="collage" data-cursor="Drag">
+        <figure class="ccard" data-slot="0"><div class="ccard-in"><img src="../../assets/images/products/21012982.jpg" alt="パールフリル カフェマット（パープル）" width="800" height="800" /><figcaption>Pearl Frill Café Mat</figcaption></div></figure>
+        <figure class="ccard" data-slot="1"><div class="ccard-in"><img src="../../assets/images/products/21125897.jpg" alt="ジャカードリボンのマーチンゲール首輪（アイスブルー）" width="800" height="800" /><figcaption>Jacquard Martingale</figcaption></div></figure>
+        <figure class="ccard" data-slot="2"><div class="ccard-in"><img src="../../assets/images/products/21012947.jpg" alt="パールフリル カフェマット（ルージュピンク）" width="800" height="800" loading="lazy" /><figcaption>Rouge Pink Frill</figcaption></div></figure>
+        <figure class="ccard" data-slot="3"><div class="ccard-in"><img src="../../assets/images/products/21127748.jpg" alt="オリエンタル柄ジャカードのリード（グリーン×ブラック）" width="800" height="800" loading="lazy" /><figcaption>Oriental Lead</figcaption></div></figure>
+        <figure class="ccard" data-slot="4"><div class="ccard-in"><img src="../../assets/images/products/18771002.jpg" alt="大粒パールのレースのシュシュ首輪" width="800" height="800" loading="lazy" /><figcaption>Pearl Chouchou</figcaption></div></figure>
+        <button class="collage-next" id="collageNext" type="button">
+          <span aria-hidden="true">⇄</span> <span class="cn-txt">ドラッグ・スワイプでめくる</span><span class="visually-hidden">（次の写真を前に出す）</span>
+        </button>
+      </div>
+
+      <a class="scroll-cue" href="#concept" aria-label="下へスクロール"><span>Scroll</span><i aria-hidden="true"></i></a>
+    </section>
+
+    <!-- ══ MARQUEE ══ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="mq-row mq-text">
+        <div class="mq-track">
+          <span>Pearl Frill Café Mat</span><b>✦</b><span>座るだけで絵になる特等席</span><b>✦</b><span>Jacquard Martingale</span><b>✦</b><span>一つひとつ手作り</span><b>✦</b><span>Handmade in Saitama</span><b>✦</b>
+          <span>Pearl Frill Café Mat</span><b>✦</b><span>座るだけで絵になる特等席</span><b>✦</b><span>Jacquard Martingale</span><b>✦</b><span>一つひとつ手作り</span><b>✦</b><span>Handmade in Saitama</span><b>✦</b>
+        </div>
+      </div>
+      <div class="mq-row mq-photos"><div class="mq-track" id="mqPhotos"></div></div>
+    </div>
+
+    <!-- ══ CONCEPT ══ -->
+    <section class="sec concept" id="concept" data-tone="cream" aria-labelledby="conceptTitle">
+      <div class="wrap concept-grid">
+        <header class="sec-label reveal">
+          <span class="num">01</span><span class="en">Concept</span><span class="ja">ブランドについて</span>
+        </header>
+        <h2 class="concept-title reveal" id="conceptTitle">
+          <span class="d-line">愛犬とのお出かけを、</span>
+          <span class="d-line">もっと<em>美しく</em>、</span>
+          <span class="d-line">もっと<em>特別</em>に。</span>
+        </h2>
+        <div class="concept-body reveal">
+          <p><strong>and AJ paw-pads</strong> は、上品さと写真映えにこだわったハンドメイドのペットアクセサリーブランドです。</p>
+          <p>カフェマットや首輪、リードなど、日常のお出かけからイベント、撮影シーンまで楽しめるアイテムを、一つひとつ丁寧に手作りしています。大人の飼い主さまと愛犬・愛猫に寄り添う、華やかで上品なデザインを。</p>
+        </div>
+        <figure class="concept-photo p1 reveal">
+          <img src="../../assets/images/products/21012962.jpg" alt="ホワイトのオーガンジーフリルが重なるカフェマット" width="800" height="800" loading="lazy" />
+          <figcaption class="vcap">オーガンジーの波打つフリル</figcaption>
+        </figure>
+        <figure class="concept-photo p2 reveal">
+          <img src="../../assets/images/products/21125826.jpg" alt="ロイヤルブルーのジャカードリボンとゴールド金具のマーチンゲール首輪" width="800" height="800" loading="lazy" />
+          <figcaption class="vcap">ジャカード × ゴールド金具</figcaption>
+        </figure>
+        <ul class="stats reveal" aria-label="Creema での実績（2026年11月時点）">
+          <li><b class="count" data-count="138">138</b><span>Creema 販売済み</span></li>
+          <li><b class="count" data-count="67">67</b><span>取引評価</span></li>
+          <li><b class="count" data-count="32" id="statOnSale">32</b><span>販売中の作品</span></li>
+        </ul>
+        <p class="stats-note reveal">※ Creema での実績（2026年11月時点）</p>
+      </div>
+    </section>
+
+    <!-- ══ COLOUR PLAY ══ -->
+    <section class="sec colors" id="colors" data-tone="mist" aria-labelledby="colorsTitle">
+      <div class="wrap colors-grid">
+        <header class="sec-label reveal">
+          <span class="num">02</span><span class="en">Choose a colour</span><span class="ja">色を選ぶ</span>
+        </header>
+        <div class="colors-text reveal">
+          <h2 class="big-en" id="colorsTitle"><span>Play</span> <em>with</em> <span>colour</span></h2>
+          <p class="colors-lead">色見本を押すと、写真とページのアクセントカラーが変わります。うちの子に似合う一色を探してみてください。</p>
+
+          <div class="cp-tabs" role="tablist" aria-label="色見本の種類">
+            <button class="cp-tab" role="tab" id="cpTabMat" aria-selected="true" aria-controls="cpPanel" data-set="mat" type="button">カフェマット <small>4 colours</small></button>
+            <button class="cp-tab" role="tab" id="cpTabMg" aria-selected="false" aria-controls="cpPanel" data-set="martingale" tabindex="-1" type="button">マーチンゲール <small>6 colours</small></button>
+          </div>
+          <div class="cp-panel" id="cpPanel" role="tabpanel" aria-labelledby="cpTabMat">
+            <div class="swatches" id="swatches" role="group" aria-label="カラーを選ぶ">
+              <!-- JS が色見本を描画。JS 無しでは下の既定表示のみ -->
+            </div>
+            <div class="cp-info" aria-live="polite">
+              <p class="cp-cat" id="cpCat">Pearl Frill Café Mat</p>
+              <p class="cp-name" id="cpName">パープル</p>
+              <p class="cp-price" id="cpPrice">¥5,300 <small>税込</small></p>
+              <a class="btn btn-primary magnetic" id="cpBuy" href="https://www.creema.jp/item/21012982/detail" target="_blank" rel="noopener" data-cursor="Buy">この色を Creema で見る<span class="arrow" aria-hidden="true">↗</span></a>
+              <button class="cp-reset ulink" id="cpReset" type="button">アクセントを元に戻す</button>
+            </div>
+          </div>
+        </div>
+        <figure class="cp-stage reveal">
+          <div class="cp-frame" id="cpFrame">
+            <img id="cpImg" src="../../assets/images/products/21012982.jpg" alt="パールフリル カフェマット（パープル）" width="800" height="800" loading="lazy" />
+          </div>
+          <figcaption class="cp-cap"><span id="cpCap">Purple</span><i aria-hidden="true"></i></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ══ COLLECTION ══ -->
+    <section class="sec collection" id="collection" data-tone="cream" aria-labelledby="collectionTitle">
+      <div class="wrap">
+        <header class="sec-label reveal">
+          <span class="num">03</span><span class="en">Collection</span><span class="ja">作品一覧</span>
+        </header>
+        <h2 class="big-en reveal" id="collectionTitle"><span>The</span> <em>Collection</em></h2>
+
+        <!-- 主役の2点: パールフリル カフェマット ／ ケープ（写真待ち） -->
+        <div class="stars">
+          <article class="star star-mat reveal">
+            <div class="star-media">
+              <img class="sm-a" src="../../assets/images/products/21012971.jpg" alt="パールフリル カフェマット（ミルキーピンク）" width="800" height="800" loading="lazy" />
+              <img class="sm-b" src="../../assets/images/products/21012982.jpg" alt="" aria-hidden="true" width="800" height="800" loading="lazy" />
+              <span class="star-badge">主役<small>Signature</small></span>
+            </div>
+            <div class="star-text">
+              <p class="star-en">Pearl Frill Café Mat</p>
+              <h3 class="star-ja">パールフリル<br>カフェマット</h3>
+              <p class="star-catch">座るだけで絵になる、<br>うちの子の特等席。</p>
+              <p class="star-desc">オーガンジーの波打つフリルに、アイレットレースとパールを重ねた円形のマット。リバーシブルで、パープル・ミルキーピンク・ホワイト・ルージュピンクの4色。</p>
+              <p class="star-price">¥5,300 <small>税込</small></p>
+              <div class="star-actions">
+                <button class="btn btn-primary magnetic" type="button" data-filter-jump="mat">4色を見る</button>
+                <a class="ulink" href="#colors">色見本で遊ぶ</a>
+              </div>
+            </div>
+          </article>
+
+          <!--
+            ▼ ケープ（Cape）差し替え用スロット
+            写真が届いたら:
+              1. 画像を assets/images/cape.jpg（800x800 推奨）に置く
+              2. 下の <div class="cape-placeholder">…</div> を
+                 <img src="../../assets/images/cape.jpg" alt="ケープ（色名など）" width="800" height="800" loading="lazy" />
+                 に差し替える
+              3. .star-cape の「Coming soon / 写真準備中」を作品名に、説明・価格は確定した内容だけを追記する
+              4. Creema に出品したら <a class="btn btn-primary" href="作品URL" target="_blank" rel="noopener">Creema で見る</a> を追加
+            ※ 説明文・価格は未確定のため、ここでは記載していません。
+          -->
+          <article class="star star-cape reveal" aria-labelledby="capeTitle">
+            <div class="star-media">
+              <div class="cape-placeholder" aria-hidden="true"><span class="cape-ribbon"></span><span class="cape-mark">Cape</span></div>
+            </div>
+            <div class="star-text">
+              <p class="star-en">Cape — Coming soon</p>
+              <h3 class="star-ja" id="capeTitle">ケープ</h3>
+              <p class="star-desc">写真準備中です。公開のお知らせは Instagram で。</p>
+              <div class="star-actions">
+                <a class="ulink" href="https://www.instagram.com/and.aj.pawpads" target="_blank" rel="noopener" data-cursor="Follow">Instagram で待つ ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="filter-bar reveal">
+          <div class="filters" id="filters" role="group" aria-label="カテゴリで絞り込み"></div>
+          <p class="filter-desc" id="filterDesc" aria-live="polite"></p>
+        </div>
+        <ul class="grid" id="grid">
+          <li class="grid-fallback"><p>商品一覧は <a href="https://www.creema.jp/c/and_aj_pawpads" target="_blank" rel="noopener">Creema のショップページ</a> でご覧いただけます。</p></li>
+        </ul>
+        <p class="grid-note">写真を押すとその場で詳細が開きます。作品名から Creema の作品ページへ。価格は税込・2026年11月時点。<br>ご購入は <a class="ulink" href="https://www.creema.jp/c/and_aj_pawpads" target="_blank" rel="noopener" data-cursor="Buy">Creema ショップ</a> から（BASE ショップは<span class="pending">準備中</span>）。</p>
+      </div>
+    </section>
+
+    <!-- ══ ORDER ══ -->
+    <section class="sec order" id="order" data-tone="deep" aria-labelledby="orderTitle">
+      <div class="wrap order-grid">
+        <header class="sec-label reveal">
+          <span class="num">04</span><span class="en">Semi order</span><span class="ja">オーダー・ご相談</span>
+        </header>
+        <p class="order-vertical reveal" aria-hidden="true">うちの子だけの、特別な一点を。</p>
+        <div class="order-main">
+          <h2 class="order-title reveal" id="orderTitle"><span class="visually-hidden">うちの子だけの、特別な一点を。</span><span class="big-en" aria-hidden="true"><em>Made</em> for <span>yours</span></span></h2>
+          <p class="order-lead reveal">掲載のサイズや色が合わないとき、多頭飼いでおそろいにしたいとき。Instagram の DM からお気軽にご相談ください。</p>
+          <ol class="order-list">
+            <li class="reveal"><span class="ol-n">i.</span><div><b>サイズ変更</b><span>首まわりに合わせたフィット調整</span></div></li>
+            <li class="reveal"><span class="ol-n">ii.</span><div><b>色違い</b><span>掲載以外のカラーでのご相談</span></div></li>
+            <li class="reveal"><span class="ol-n">iii.</span><div><b>おそろい</b><span>多頭飼いの子たちや、首輪とリードのセットで</span></div></li>
+          </ol>
+          <a class="btn btn-cream magnetic reveal" href="https://www.instagram.com/and.aj.pawpads" target="_blank" rel="noopener" data-cursor="DM">Instagram DM で相談する<span class="arrow" aria-hidden="true">↗</span></a>
+          <p class="order-note reveal">お返事は Instagram の DM でお送りします。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ MAKER ══ -->
+    <!-- ※ Maker セクションの文章は仮文です。作り手ご本人の言葉に差し替えてください（名前・経歴などは未記載のまま）。 -->
+    <section class="sec maker" id="maker" data-tone="mist" aria-labelledby="makerTitle">
+      <div class="wrap maker-grid">
+        <header class="sec-label reveal">
+          <span class="num">05</span><span class="en">Maker</span><span class="ja">作り手より</span>
+        </header>
+        <figure class="maker-photo reveal">
+          <img src="../../assets/images/creema-icon.jpg" alt="and AJ paw-pads のロゴ" width="400" height="400" loading="lazy" />
+        </figure>
+        <div class="maker-text reveal">
+          <h2 class="maker-quote" id="makerTitle">愛するペットと過ごす時間を、<br>ほんの少し、特別にしたくて。</h2>
+          <p>ひとつひとつ手で縫い、手で仕上げる。そのぬくもりが、うちの子の毎日に溶け込んでくれたら嬉しいです。</p>
+          <p>サイズのこと、色のこと、「こんなのできますか？」という小さな疑問も、Instagram DM からお気軽にお声がけください。</p>
+          <p class="maker-sign"><i>— and AJ paw-pads</i></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ GALLERY (archive) ══ -->
+    <section class="sec gallery" id="gallery" data-tone="cream" aria-labelledby="galleryTitle">
+      <div class="wrap">
+        <header class="sec-label reveal">
+          <span class="num">06</span><span class="en">Archive</span><span class="ja">これまでの作品</span>
+        </header>
+        <h2 class="big-en reveal" id="galleryTitle"><em>Archive</em> <span>&amp; seasons</span></h2>
+        <p class="gallery-note reveal">これまでに制作した作品や季節のアイテムです（現在は販売していないものを含みます）。</p>
+        <ul class="archive" id="archive">
+          <li class="grid-fallback"><p>過去の作品は <a href="https://www.instagram.com/and.aj.pawpads" target="_blank" rel="noopener">Instagram</a> でもご覧いただけます。</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ══ INSTAGRAM ══ -->
+    <section class="sec follow" id="instagram" data-tone="light" aria-labelledby="followTitle">
+      <div class="wrap follow-inner">
+        <p class="sec-label reveal"><span class="num">07</span><span class="en">Follow</span><span class="ja">新作はインスタから</span></p>
+        <h2 class="follow-handle reveal" id="followTitle">
+          <a href="https://www.instagram.com/and.aj.pawpads" target="_blank" rel="noopener" data-cursor="Follow">@and.aj.pawpads</a>
+        </h2>
+        <p class="follow-lead reveal">新作・再販・季節限定アイテム、イベント出店のお知らせは Instagram がいちばん早く届きます。</p>
+        <a class="btn btn-primary magnetic reveal" href="https://www.instagram.com/and.aj.pawpads" target="_blank" rel="noopener" data-cursor="Follow">Instagram をフォロー<span class="arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <!-- ══ FAQ ══ -->
+    <section class="sec faq" id="faq" data-tone="cream" aria-labelledby="faqTitle">
+      <div class="wrap faq-grid">
+        <header class="sec-label reveal">
+          <span class="num">08</span><span class="en">FAQ</span><span class="ja">よくあるご質問</span>
+        </header>
+        <h2 class="big-en reveal" id="faqTitle"><em>Questions</em></h2>
+        <div class="faq-list">
+          <details class="qa reveal">
+            <summary><span class="q">Q</span>購入はどこからできますか？<i aria-hidden="true"></i></summary>
+            <div class="qa-a"><p><a class="ulink" href="https://www.creema.jp/c/and_aj_pawpads" target="_blank" rel="noopener" data-cursor="Buy">Creema のショップ</a>からご購入いただけます。BASE ショップは準備中です。</p></div>
+          </details>
+          <details class="qa reveal">
+            <summary><span class="q">Q</span>サイズ変更や色違いはできますか？<i aria-hidden="true"></i></summary>
+            <div class="qa-a"><p>掲載のサイズが合わない場合や、色違い・おそろいをご希望の場合は、<a class="ulink" href="https://www.instagram.com/and.aj.pawpads" target="_blank" rel="noopener" data-cursor="DM">Instagram の DM</a> からご相談ください。首輪は首まわりを測ってからお選びください。</p></div>
+          </details>
+          <details class="qa reveal">
+            <summary><span class="q">Q</span>カフェマットの大きさは？<i aria-hidden="true"></i></summary>
+            <div class="qa-a"><p>パールフリル カフェマットは M 直径約55cm / L 直径約60cm です。詳しくは各作品の Creema ページをご覧ください。</p></div>
+          </details>
+          <details class="qa reveal">
+            <summary><span class="q">Q</span>マーチンゲール首輪のサイズは？<i aria-hidden="true"></i></summary>
+            <div class="qa-a"><p>S 約23〜37cm / M 約28〜46cm です。お揃いのリード（長さ約100cm・幅約3.8cm）もあります。</p></div>
+          </details>
+          <details class="qa reveal">
+            <summary><span class="q">Q</span>イベントへの出店はありますか？<i aria-hidden="true"></i></summary>
+            <div class="qa-a"><p>出店情報は <a class="ulink" href="https://www.instagram.com/and.aj.pawpads" target="_blank" rel="noopener" data-cursor="Follow">Instagram</a> でお知らせしています。</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ══ Footer ══ -->
+  <footer class="site-foot" data-tone="night">
+    <div class="foot-ribbon" aria-hidden="true"></div>
+    <div class="wrap foot-grid">
+      <p class="foot-logo"><i>and</i> AJ paw-pads</p>
+      <p class="foot-copy">愛犬とのお出かけを、もっと美しく、もっと特別に。</p>
+      <ul class="foot-links">
+        <li><a class="ulink" href="https://www.creema.jp/c/and_aj_pawpads" target="_blank" rel="noopener" data-cursor="Buy">Creema ↗</a></li>
+        <li><a class="ulink" href="https://www.instagram.com/and.aj.pawpads" target="_blank" rel="noopener" data-cursor="Follow">Instagram ↗</a></li>
+        <li><span class="pending">BASE（準備中）</span></li>
+      </ul>
+      <p class="foot-small">&copy; 2026 and AJ paw-pads</p>
+    </div>
+  </footer>
+
+  <!-- 追従する購入ボタン -->
+  <a class="sticky-buy magnetic" id="stickyBuy" href="https://www.creema.jp/c/and_aj_pawpads" target="_blank" rel="noopener" data-cursor="Buy">
+    <span class="sb-dot" aria-hidden="true"></span>Creema で購入<span class="arrow" aria-hidden="true">↗</span>
+  </a>
+
+  <!-- クイックビュー -->
+  <dialog class="qv" id="qv" aria-labelledby="qvName">
+    <div class="qv-inner">
+      <button class="qv-close" id="qvClose" type="button" aria-label="閉じる"><span aria-hidden="true">×</span></button>
+      <div class="qv-media"><img id="qvImg" src="" alt="" width="800" height="800" /></div>
+      <div class="qv-body">
+        <p class="qv-cat" id="qvCat"></p>
+        <h3 class="qv-name" id="qvName"></h3>
+        <p class="qv-price" id="qvPrice"></p>
+        <p class="qv-desc" id="qvDesc"></p>
+        <div class="qv-sibs-wrap">
+          <p class="qv-sibs-label" id="qvSibsLabel">同じシリーズ</p>
+          <div class="qv-sibs" id="qvSibs" role="group" aria-labelledby="qvSibsLabel"></div>
+        </div>
+        <div class="qv-actions">
+          <a class="btn btn-primary" id="qvBuy" href="https://www.creema.jp/c/and_aj_pawpads" target="_blank" rel="noopener" data-cursor="Buy">Creema で購入<span class="arrow" aria-hidden="true">↗</span></a>
+          <a class="btn btn-line" href="https://www.instagram.com/and.aj.pawpads" target="_blank" rel="noopener" data-cursor="DM">DM でオーダー相談</a>
+        </div>
+        <p class="qv-note">お支払いは Creema の作品ページで行います。</p>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="../../assets/data/products.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

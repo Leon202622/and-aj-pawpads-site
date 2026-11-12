@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>デザイン案の比較 | and AJ paw-pads</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; padding: 40px 16px 64px; background: #f3efe8; color: #2f2925;
+      font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif; line-height: 1.7; }
+    main { max-width: 1040px; margin: 0 auto; }
+    h1 { font: 400 1.7rem Georgia, "Yu Mincho", serif; margin: 0 0 6px; }
+    .lead { color: #6b6057; margin: 0 0 28px; font-size: .92rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
+    .card { display: flex; flex-direction: column; background: #fffdf9; border: 1px solid #ddd3c4; border-radius: 14px;
+      overflow: hidden; color: inherit; text-decoration: none; transition: transform .3s, box-shadow .3s; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 16px 32px rgba(60,50,40,.16); }
+    .card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; display: block; border-bottom: 1px solid #e6ddcf; background: #e9e2d6; }
+    .swatch { height: 10px; }
+    .body { padding: 14px 16px 18px; }
+    .tag { font-size: .7rem; letter-spacing: .12em; color: #8a7d72; }
+    h2 { font: 400 1.15rem Georgia, "Yu Mincho", serif; margin: 2px 0 6px; }
+    p { margin: 0; font-size: .84rem; color: #5a4f44; }
+    .go { margin-top: 10px; font-size: .82rem; font-weight: 700; color: #35615f; }
+    @media (prefers-reduced-motion: reduce) { .card { transition: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>デザイン案の比較</h1>
+    <p class="lead">ご回答いただいた「アンティーク調のくすみカラー」「アンティーク・クラシック／大人可愛い」「主役はカフェマットとケープ」に沿った案です。先頭の3つは「ジャカード・ティール」のまま動きを変えた案です。カードを開くと実際に動くサイトが見られます。</p>
+    <div class="grid">
+      <a class="card" href="v2-and-aj/index.html">
+        <img src="thumbs/v2.jpg" alt="and AJ 修正版の画面" loading="lazy">
+        <div class="swatch" style="background:linear-gradient(90deg,#3b5b62,#87a2ac,#fffaf1,#d9b979)"></div>
+        <div class="body">
+          <span class="tag">最新 ／ and AJ 修正版</span>
+          <h2>and AJ</h2>
+          <p>新しいロゴ、店名「and AJ」、リボンなし、すべて縦スクロール。カフェマットと首輪は色を押すと写真と背景が変わります。</p>
+          <div class="go">サイトを開く →</div>
+        </div>
+      </a>
+      <a class="card" href="t1-ribbon-story/index.html">
+        <img src="thumbs/t1.jpg" alt="リボンが縫う物語の画面" loading="lazy">
+        <div class="swatch" style="background:linear-gradient(90deg,#35615f,#7faba9,#fffaf1,#d9b979)"></div>
+        <div class="body">
+          <span class="tag">ティール1 ／ スクロールで物語（GSAP）</span>
+          <h2>リボンが縫う物語</h2>
+          <p>リボンが結ばれて始まり、スクロールに合わせてページを縫っていきます。マットの色が順に切り替わり、コレクションは横に流れます。</p>
+          <div class="go">サイトを開く →</div>
+        </div>
+      </a>
+      <a class="card" href="t2-woven-depth/index.html">
+        <img src="thumbs/t2.jpg" alt="布が波打つ背景の画面" loading="lazy">
+        <div class="swatch" style="background:linear-gradient(90deg,#35615f,#7faba9,#fffaf1,#d9b979)"></div>
+        <div class="body">
+          <span class="tag">ティール2 ／ 奥行きと立体（WebGL）</span>
+          <h2>布が波打つ背景</h2>
+          <p>ジャカード柄の布とリボンが背景でゆったり波打ちます。マットが立体的に回り、カードはマウスで傾きます。</p>
+          <div class="go">サイトを開く →</div>
+        </div>
+      </a>
+      <a class="card" href="t3-atelier-play/index.html">
+        <img src="thumbs/t3.jpg" alt="雑誌風アトリエの画面" loading="lazy">
+        <div class="swatch" style="background:linear-gradient(90deg,#35615f,#7faba9,#fffaf1,#d9b979)"></div>
+        <div class="body">
+          <span class="tag">ティール3 ／ 触って楽しい（素のHTML/CSS/JS）</span>
+          <h2>雑誌風アトリエ</h2>
+          <p>写真をドラッグでめくれるコラージュ、色見本でページの色が変わる、その場で開く商品詳細。</p>
+          <div class="go">サイトを開く →</div>
+        </div>
+      </a>
+      <a class="card" href="d-lace-blue/index.html">
+        <img src="thumbs/d.jpg" alt="案Dの画面" loading="lazy">
+        <div class="swatch" style="background:linear-gradient(90deg,#5f7d96,#8fa9bd,#f6f1e7,#c9c0b0)"></div>
+        <div class="body">
+          <span class="tag">D ／ くすみブルー × レース</span>
+          <h2>レース・ブルー</h2>
+          <p>ご提示いただいたイメージに合わせた案。レースの角飾り、サテンリボン、飾り縁プレート。Instagram／Customer Photo／Online Shop／Event の4枚タイル。</p>
+          <div class="go">サイトを開く →</div>
+        </div>
+      </a>
+      <a class="card" href="../index.html">
+        <img src="thumbs/base.jpg" alt="ベース案の画面" loading="lazy">
+        <div class="swatch" style="background:linear-gradient(90deg,#35615f,#7faba9,#fffaf1,#d9b979)"></div>
+        <div class="body">
+          <span class="tag">BASE ／ くすみティール</span>
+          <h2>ジャカード・ティール</h2>
+          <p>既存サイトを土台にした案。ロゴと同じ青緑、ジャカード柄のリボン装飾。商品一覧・カテゴリ切替・写真が流れる帯を追加。</p>
+          <div class="go">サイトを開く →</div>
+        </div>
+      </a>
+      <a class="card" href="a-greige-gold/index.html">
+        <img src="thumbs/a.jpg" alt="案Aの画面" loading="lazy">
+        <div class="swatch" style="background:linear-gradient(90deg,#8c8073,#cfc4b4,#f4efe6,#b8975a)"></div>
+        <div class="body">
+          <span class="tag">A ／ グレージュ × ゴールド</span>
+          <h2>アンティーク・クラシック</h2>
+          <p>洋書の扉ページのような額縁と飾り罫。雑誌風の広い余白、横に流れるコレクション。</p>
+          <div class="go">サイトを開く →</div>
+        </div>
+      </a>
+      <a class="card" href="b-dusty-blue/index.html">
+        <img src="thumbs/b.jpg" alt="案Bの画面" loading="lazy">
+        <div class="swatch" style="background:linear-gradient(90deg,#5f7a8f,#9db4c4,#f6f2ea,#c9ad74)"></div>
+        <div class="body">
+          <span class="tag">B ／ くすみブルー</span>
+          <h2>大人可愛い</h2>
+          <p>フリルやスカラップ、リボンのモチーフ。丸い写真がふわりと浮かび、やわらかく弾む動き。</p>
+          <div class="go">サイトを開く →</div>
+        </div>
+      </a>
+      <a class="card" href="c-antique-blue/index.html">
+        <img src="thumbs/c.jpg" alt="案Cの画面" loading="lazy">
+        <div class="swatch" style="background:linear-gradient(90deg,#2f4257,#6f8aa3,#efe8da,#b8975a)"></div>
+        <div class="body">
+          <span class="tag">C ／ くすみブルー</span>
+          <h2>アンティーク・ストーリー</h2>
+          <p>章立てでスクロールすると物語が進む構成。リボンがページを縫い、マットの色が切り替わる。</p>
+          <div class="go">サイトを開く →</div>
+        </div>
+      </a>
+    </div>
+  </main>
+</body>
+</html>

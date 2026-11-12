@@ -53,30 +53,36 @@
 
 ```
 and-aj-pawpads-site/
-├── index.html              # メインページ
+├── index.html                  # メインページ（ベース案: jacquard-teal）
 ├── assets/
-│   ├── css/
-│   │   └── style.css       # スタイルシート（jacquard-teal テーマ）
-│   └── images/             # 画像ファイル（ギャラリー等）
+│   ├── css/style.css           # スタイルシート（jacquard-teal テーマ）
+│   ├── css/motion.css          # 商品グリッド・動きの演出
+│   ├── js/main.js              # 商品一覧の描画・スクロール演出
+│   ├── data/products.js        # 商品データ（Creema 販売中作品・過去作）
+│   └── images/products|archive # 商品写真（Creema 掲載の自社写真）
+├── designs/                    # デザイン比較用の別案
+│   ├── index.html              # 4案の比較ページ
+│   ├── a-greige-gold/          # A: グレージュ×ゴールド／アンティーク・クラシック
+│   ├── b-dusty-blue/           # B: くすみブルー／大人可愛い
+│   └── c-antique-blue/         # C: くすみブルー／アンティーク・ストーリー
 └── README.md
 ```
 
-## ページセクション
+## 商品の更新方法
 
-- **Hero** — ブランド名・キャッチコピー・主要CTAボタン
-- **About** — ブランド紹介
-- **Products** — 商品カテゴリ一覧（BASEへ誘導）
-- **Gallery** — お客様写真・イベント様子
-- **Events** — 出店予定イベント情報
-- **Order / Contact** — 購入・オーダー・お問い合わせ導線
+`assets/data/products.js` の `AJ_PRODUCTS` に1件追加（または削除）すると、全デザイン案の商品一覧に反映されます。
+写真は `assets/images/products/` に置き、`img` にパスを書きます。
+
+- **ケープ**は写真未入手のため各案とも「Coming soon」枠です。写真が届いたら HTML 内のコメントに従って差し替えてください。
+- **BASE** は開設準備中の表示です（以前の仮URLは実在しないためリンクを外しています）。開設後に実URLへ差し替えてください。
 
 ## 外部リンク
 
 | サービス | URL | 用途 |
 |---------|-----|------|
-| BASE | https://andajpawpads.base.shop/ | メイン購入導線（**仮URL**） |
+| Creema | https://www.creema.jp/c/and_aj_pawpads | メイン購入導線（販売中） |
+| BASE | （開設準備中） | 開設後に追加 |
 | Instagram | https://www.instagram.com/and.aj.pawpads | DM相談・情報発信 |
-| Creema | https://www.creema.jp/c/and_aj_pawpads | サブ購入導線 |
 
 ---
 
